@@ -5,20 +5,23 @@
   /links                                                                        - все размещения и ссылки
   /report [last|first|linear|position]                                          - отчёт в три блока: знаем / оцениваем / не видим
   /status                                                                       - полнота данных: какие поля не заполнены, какие слепые зоны открыты
-  /import                                                                       - загрузить историю продаж (прислать base.xlsx или base.csv файлом)
   /paid номер_лида сумма [курсы через запятую]                                  - внести оплату вручную
   /export                                                                       - скачать базу данных
   /cancel                                                                       - отменить ввод
 """
 import asyncio
 import logging
+import math
 import re
+import tempfile
+import sqlite3
+from pathlib import Path
 from urllib.parse import quote
 
 from aiogram import Bot, Dispatcher, F, Router
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.exceptions import TelegramNetworkError, TelegramUnauthorizedError
+from aiogram.exceptions import TelegramNetworkError, TelegramUnauthorizedError, TelegramRetryAfter, TelegramServerError
 from aiogram.filters import Command, CommandObject, CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -26,9 +29,10 @@ from aiogram.types import BotCommand, BotCommandScopeChat, CallbackQuery, FSInpu
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from core import config, db
+from core.delivery import CURRENT_EVENT, stamp
+from bot.reliable import instance_lock, run, tolerate_stale_ui
 from core.attribution import MODELS, ORGANIC_BOT, HISTORY, report, stable_winners, summary
 from core.catalog import BUNDLES, COURSES, DIRECTIONS, bundle_title, rub
-from core.importer import import_bytes
 from core.quality import status
 from datetime import datetime
 
@@ -359,6 +363,9 @@ async def save_payment(message: Message, bot: Bot, lead_id: int, text: str, stat
     if not ld:
         await message.answer("Лид не найден.")
         return False
+    if ld["status"] == "paid":
+        await message.answer("Оплата по этой заявке уже записана.")
+        return False
     amount, courses = parse_payment(text, ld["course_interest"])
     if not amount or amount <= 0:
         await message.answer("Не понял сумму. Пример: <code>14950</code> или <code>14950 ML про, AI агенты</code>")
@@ -428,8 +435,7 @@ def admin_menu():
     kb.button(text="💰 ROMI", callback_data="romi:last")
     kb.button(text="📈 Отчёт", callback_data="adm:report:last")
     kb.button(text="🩺 Полнота данных", callback_data="adm:status")
-    kb.button(text="📥 Загрузить продажи", callback_data="adm:import")
-    kb.adjust(1, 1, 2, 1, 1)
+    kb.adjust(1, 1, 2, 1)
     return kb.as_markup()
 
 
@@ -458,18 +464,23 @@ def romi_dashboard(model: str) -> str:
     head = [f"📊 <b>ROMI ПО РЕКЛАМЕ</b>",
             f"Период: {short_date(s['period'][0])} – {short_date(s['period'][1])} · "
             f"модель {MODEL_LABELS[model]}, окно {s['window']} дн.", ""]
+    if not s["cost_complete"]:
+        head.append("Не у всех размещений известны затраты. Общий атрибуционный ROMI не определён.")
+        head.append("Показатели отдельных размещений: /report")
+        return "\n".join(head)
     if not s["cost"]:
         head.append("Платных размещений нет: у всех стоимость 0, ROMI не считается.")
         head.append(f"Выручка через бота: <b>{rub(s['revenue_bot'])}</b>")
         return "\n".join(head)
 
-    share = s["attributed"] / s["revenue_bot"] if s["revenue_bot"] else 0
+    share = s["attributed"] / s["revenue_bot"] if s["revenue_bot"] else None
+    share_text = f"{share:.0%}" if share is not None else "доля не определена"
     head += [
         f"💰 Выручка через бота: <b>{rub(s['revenue_bot'])}</b>",
-        f"📊 Приписано рекламе: <b>{rub(s['attributed'])}</b> ({share:.0%})",
+        f"📊 Приписано рекламе: <b>{rub(s['attributed'])}</b> ({share_text})",
         f"💸 Затраты на рекламу: <b>{rub(s['cost'])}</b>",
         f"📈 ROMI: <b>{s['romi']:+.0%}</b>"
-        + (f" · по марже {s['romi_margin']:+.0%}" if config.ACQUIRING_RATE else ""),
+        + (f" · с учётом комиссии {s['romi_margin']:+.0%}" if s["romi_margin"] is not None else ""),
     ]
 
     pl = s["placements"]
@@ -477,14 +488,14 @@ def romi_dashboard(model: str) -> str:
     winners = pl[pl.romi > 0]
     if len(winners):
         for i, (pid, r) in enumerate(winners.head(3).iterrows(), 1):
-            top.append(f"{i}. <b>{r.channel}</b>\n    ROMI {r.romi:+.0%} · {rub(r.revenue)} · оплат {r.orders:.0f}")
+            top.append(f"{i}. <b>{r.channel}</b>\n    ROMI {r.romi:+.0%} · {rub(r.revenue)} · приписанных заказов {r.orders:.2f}")
     else:
         top.append("Пока ни одно размещение не окупилось.")
     loss = pl[pl.romi < 0].sort_values("romi")
     if len(loss):
         top += ["", "⚠️ <b>НЕ ОКУПИЛИСЬ</b>"]
         for pid, r in loss.head(3).iterrows():
-            top.append(f"• <b>{r.channel}</b> · ROMI {r.romi:+.0%} · потрачено {rub(r.cost)} · оплат {r.orders:.0f}")
+            top.append(f"• <b>{r.channel}</b> · ROMI {r.romi:+.0%} · потрачено {rub(r.cost)} · приписанных заказов {r.orders:.2f}")
 
     good, bad = stable_winners(conn, config.ATTRIBUTION_WINDOW_DAYS)
     def names(ids, limit=3):
@@ -494,14 +505,14 @@ def romi_dashboard(model: str) -> str:
     tip = ["", "💡 <b>Рекомендация</b>"]
     if good:
         best = [i for i in pl.index if i in good]          # уже отсортированы по ROMI
-        tip.append(f"Окупаются во всех моделях: {names(best)}. Сюда можно смещать бюджет.")
+        tip.append(f"Положительный атрибуционный ROMI во всех моделях: {names(best)}. Кандидаты для проверки контрольным экспериментом.")
     if bad:
         worst = [i for i in pl.sort_values("romi").index if i in bad]
         tip.append(f"В минусе во всех моделях: {names(worst)}. Кандидаты на сокращение.")
     if not good and not bad:
         tip.append("Выводы неустойчивы: результат меняется от модели атрибуции. "
                    "Нужно больше данных, прежде чем перекладывать бюджет.")
-    tip.append("<i>ROMI показывает, кому приписана покупка, а не то, случилась бы она без рекламы. "
+    tip.append("<i>Атрибуционный ROMI показывает, кому приписана покупка, а не то, случилась бы она без рекламы. "
                "Перед крупным перераспределением — holdout-эксперимент.</i>")
     return "\n".join(head + top + tip)
 
@@ -549,8 +560,6 @@ async def adm_actions(cb: CallbackQuery, state: FSMContext, bot: Bot):
         await send_report(cb.message, cb.data.split(":")[2])
     elif action == "status":
         await send_long(cb.message, status(conn, config.ACQUIRING_RATE), limit=3900)
-    elif action == "import":
-        await cb.message.answer(IMPORT_HELP)
 
 
 
@@ -566,7 +575,6 @@ async def setup_commands(bot: Bot):
         BotCommand(command="links", description="Мои размещения и ссылки"),
         BotCommand(command="report", description="Отчёт: знаем / оцениваем / не видим"),
         BotCommand(command="status", description="Полнота данных"),
-        BotCommand(command="import", description="Загрузить историю продаж"),
         BotCommand(command="export", description="Скачать базу"),
         BotCommand(command="cancel", description="Отменить ввод"),
     ]
@@ -589,7 +597,7 @@ def nl_parse(field: str, text: str):
             num = float(v)
         except ValueError:
             return None, "Нужно число, например 10000" if field == "cost" else "Нужно число, например 20"
-        if num < 0 or (field == "discount_value" and num > 100):
+        if not math.isfinite(num) or num < 0 or (field == "discount_value" and num > 100):
             return None, "Число вне допустимого диапазона"
         return num, None
     if field == "publication_time":
@@ -735,7 +743,7 @@ async def send_links(message: Message, bot: Bot):
     if not rows:
         await message.answer("Размещений пока нет. Создайте через /newlink")
         return
-    text = "\n\n".join(f"<b>{r['channel']}</b> · {rub(r['cost'])} · {r['publication_time'] or 'время не указано'}"
+    text = "\n\n".join(f"<b>{r['channel']}</b> · {(rub(r['cost']) if r['cost_known'] else 'стоимость неизвестна')} · {r['publication_time'] or 'время не указано'}"
                        + (f" · {r['campaign_name']}" if r["campaign_name"] else "")
                        + f"\nhttps://t.me/{me.username}?start={r['placement_id']}" for r in rows)
     await send_long(message, text)
@@ -765,6 +773,10 @@ async def report_cmd(message: Message, command: CommandObject):
     await send_report(message, model)
 
 
+def pd_is_unknown_cost(cost):
+    return cost is None or cost != cost
+
+
 async def send_report(message: Message, model: str):
     """Компактный отчёт: по строке на размещение. Факты и оценки помечены в подписи."""
     rep = report(conn, model, config.ATTRIBUTION_WINDOW_DAYS)
@@ -781,22 +793,24 @@ async def send_report(message: Message, model: str):
             continue
         funnel = f"зашли {r.starts:g} → смотрели {r.viewed:g} → заявки {r.leads:g} → оплат {r.paid:g}"
         if pid == ORGANIC_BOT:
-            blocks.append(f"🌱 <b>{r.channel}</b>\n{funnel}\nвыручка {rub(r.paid_revenue)}")
+            blocks.append(f"🌱 <b>{r.channel}</b>\n{funnel}\nприписанная выручка {rub(r.revenue)}")
             continue
         line = [f"📢 <b>{r.channel}</b> ({pid})", funnel]
-        if r.cost:
+        if pd_is_unknown_cost(r.cost):
+            line.append(f"⚠️ стоимость неизвестна · приписано {rub(r.revenue)} · ROMI не определён")
+        elif r.cost > 0:
             money = f"затраты {rub(r.cost)} · приписано {rub(r.revenue)}"
-            if r.cpa == r.cpa:
-                money += f" · CPA {rub(r.cpa)}"
+            if r.cost_per_attributed_order == r.cost_per_attributed_order:
+                money += f" · стоимость приписанной покупки {rub(r.cost_per_attributed_order)}"
             line.append(money)
             romi = f"<b>ROMI {r.romi:+.0%}</b>" if r.romi == r.romi else "ROMI —"
-            if config.ACQUIRING_RATE and r.romi_margin == r.romi_margin:
-                romi += f" · по марже {r.romi_margin:+.0%}"
+            if r.romi_margin == r.romi_margin:
+                romi += f" · с учётом комиссии {r.romi_margin:+.0%}"
             line.append(romi)
         elif r.placement_type == "unknown":
             line.append("⚠️ метки нет в /newlink: канал и стоимость неизвестны")
         else:
-            line.append(f"свой канал, бесплатно · приписано {rub(r.revenue)}")
+            line.append(f"бесплатное размещение · приписано {rub(r.revenue)}")
         blocks.append("\n".join(line))
 
     blocks.append("<i>Воронка и оплаты - факты. ROMI - оценка модели атрибуции: "
@@ -810,41 +824,37 @@ async def status_cmd(message: Message):
         await send_long(message, status(conn, config.ACQUIRING_RATE), limit=3900)
 
 
-IMPORT_HELP = ("Пришли файл <b>base.xlsx</b> или <b>base.csv</b> как документ (скрепка → Файл).\n"
-               "Нужны колонки: Номер студента, Сумма, Курс, Время. Повторная загрузка не создаёт дублей.")
-
-
-@router.message(Command("import"))
-async def import_help(message: Message):
-    if is_admin(message):
-        await message.answer(IMPORT_HELP)
-
-
-@router.message(F.document)
-async def import_file(message: Message, bot: Bot):
-    if not is_admin(message):
-        return
-    name = message.document.file_name or ""
-    if not name.lower().endswith((".xlsx", ".xls", ".csv")):
-        await message.answer("Жду файл .xlsx или .csv")
-        return
-    data = await bot.download(message.document)
-    try:
-        r = import_bytes(conn, data, name, config.HASH_SALT, config.ACQUIRING_RATE)
-    except Exception as e:
-        await message.answer(f"Не получилось прочитать файл: {e}")
-        return
-    await message.answer(
-        f"Импорт готов ✅\nСтрок: {r['rows']}, заказов в файле: {r['orders']}\n"
-        f"Добавлено новых: {r['added']}, уже были в базе: {r['skipped']}\n"
-        f"Покупателей: {r['buyers']}, выручка: {rub(r['revenue'])}\n"
-        f"Период: {r['period'][0]:%d.%m.%Y} – {r['period'][1]:%d.%m.%Y}")
-
-
 @router.message(Command("export"))
 async def export(message: Message):
     if is_admin(message):
-        await message.answer_document(FSInputFile(config.DB_PATH))
+        with tempfile.TemporaryDirectory(prefix="attribution-export-") as folder:
+            path = Path(folder) / "backup.db"
+            # Read the committed database through a separate connection: backing
+            # up the worker connection inside its event transaction would hang.
+            with sqlite3.connect(config.DB_PATH) as reader, sqlite3.connect(path) as snapshot:
+                reader.backup(snapshot)
+                event = CURRENT_EVENT.get()
+                if event:
+                    snapshot.execute("UPDATE telegram_inbox SET status='done', payload=NULL, processed_at=? "
+                                     "WHERE bot_id=? AND update_id=?",
+                                     (stamp(), event["bot_id"], event["update_id"]))
+            await message.answer_document(FSInputFile(path))
+
+
+@router.callback_query(F.data.startswith("nl:"))
+async def expired_link_dialog(cb: CallbackQuery):
+    await cb.answer()
+    if is_admin(cb):
+        await cb.message.answer("Диалог создания размещения завершён или потерян после перезапуска. Начните заново: /newlink")
+
+
+@router.message(F.text)
+async def unhandled_text(message: Message):
+    if is_staff(message):
+        await message.answer("Нет активного диалога. После перезапуска незавершённый ввод нужно повторить. "
+                             "Оплата: /paid номер_заявки сумма. Размещение: /newlink. Меню: /menu")
+    else:
+        await message.answer("Откройте каталог через /start.")
 
 
 async def main():
@@ -856,21 +866,28 @@ async def main():
         raise SystemExit(f"В .env остался токен-пример из .env.example. Вставьте свой токен от @BotFather.\n{hint}")
     bot = Bot(config.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     try:
-        me = await bot.get_me()
-    except TelegramUnauthorizedError:
+        while True:
+            try:
+                me = await bot.get_me()
+                await setup_commands(bot)
+                break
+            except TelegramUnauthorizedError:
+                raise SystemExit("Telegram не принял токен. Возьмите действующий токен в @BotFather.\n" + hint)
+            except (TelegramNetworkError, TelegramRetryAfter, TelegramServerError) as exc:
+                logging.warning("Telegram временно недоступен (%s), повтор подключения", type(exc).__name__)
+                await asyncio.sleep(getattr(exc, "retry_after", 3))
+        print(f"Бот @{me.username} запущен. База: {config.DB_PATH}. Остановить — Ctrl+C", flush=True)
+        dp = Dispatcher()
+        dp.include_router(router)
+        bot.session.middleware(tolerate_stale_ui)
+        await run(conn, dp, bot, config.DB_PATH)
+    finally:
         await bot.session.close()
-        raise SystemExit("Telegram не принял токен (Unauthorized).\n"
-                         "Возьмите действующий токен в @BotFather: /mybots → ваш бот → API Token.\n"
-                         f"{hint} — один токен, без пробелов и кавычек, файл сохранён.")
-    except TelegramNetworkError as e:
-        await bot.session.close()
-        raise SystemExit(f"Нет связи с Telegram: {e}\nПроверьте интернет, VPN или прокси и запустите снова.")
-    await setup_commands(bot)
-    print(f"Бот @{me.username} запущен. База: {config.DB_PATH}. Остановить — Ctrl+C")
-    dp = Dispatcher()
-    dp.include_router(router)
-    await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    with instance_lock(config.DB_PATH):
+        try:
+            asyncio.run(main())
+        finally:
+            conn.close()

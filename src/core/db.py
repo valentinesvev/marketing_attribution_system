@@ -13,9 +13,11 @@ fact_attribution - какая доля выручки заказа припис�
        attribution.order_id → order, attribution.touch_id → touch; *.user_id_hash → dim_user
 """
 import hashlib
+import math
 import os
 import sqlite3
 import uuid
+from core.delivery import event_time, audit
 from datetime import datetime, timedelta, timezone
 
 MSK = timezone(timedelta(hours=3))
@@ -29,7 +31,8 @@ CREATE TABLE IF NOT EXISTS dim_placement (
     creative         TEXT,                         -- вариант поста / креатива
     post_category    TEXT,                         -- sale | discount | launch | native | content
     discount_value   REAL,                         -- размер скидки, %
-    cost             REAL NOT NULL DEFAULT 0,      -- стоимость размещения, ₽
+    cost             REAL NOT NULL DEFAULT 0,      -- стоимость; проверять cost_known
+    cost_known       INTEGER NOT NULL DEFAULT 0,  -- 1: явно известна, включая бесплатную
     publication_time TEXT,                         -- время публикации (МСК); NULL = не указано
     created_at       TEXT,
     is_synthetic     INTEGER NOT NULL DEFAULT 0
@@ -47,7 +50,11 @@ CREATE TABLE IF NOT EXISTS fact_touch (
     placement_id  TEXT REFERENCES dim_placement(placement_id),  -- NULL = пришёл без метки
     touch_type    TEXT NOT NULL DEFAULT 'bot_start',
     timestamp     TEXT NOT NULL,
-    is_synthetic  INTEGER NOT NULL DEFAULT 0
+    is_synthetic  INTEGER NOT NULL DEFAULT 0,
+    source_bot_id INTEGER,
+    source_update_id INTEGER,
+    processed_at TEXT,
+    time_source TEXT NOT NULL DEFAULT 'legacy'
 );
 CREATE TABLE IF NOT EXISTS fact_bot_event (
     event_id      INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -56,7 +63,11 @@ CREATE TABLE IF NOT EXISTS fact_bot_event (
     event_type    TEXT NOT NULL,                               -- view_direction | view_course | view_bundle
     item          TEXT,
     timestamp     TEXT NOT NULL,
-    is_synthetic  INTEGER NOT NULL DEFAULT 0
+    is_synthetic  INTEGER NOT NULL DEFAULT 0,
+    source_bot_id INTEGER,
+    source_update_id INTEGER,
+    processed_at TEXT,
+    time_source TEXT NOT NULL DEFAULT 'legacy'
 );
 CREATE TABLE IF NOT EXISTS fact_lead (
     lead_id                 INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -67,7 +78,11 @@ CREATE TABLE IF NOT EXISTS fact_lead (
     conversation_started_at TEXT NOT NULL,
     manager_id              TEXT,                  -- кто из менеджеров отметил оплату
     status                  TEXT NOT NULL DEFAULT 'open',  -- open | paid
-    is_synthetic            INTEGER NOT NULL DEFAULT 0
+    is_synthetic            INTEGER NOT NULL DEFAULT 0,
+    source_bot_id INTEGER,
+    source_update_id INTEGER,
+    processed_at TEXT,
+    time_source TEXT NOT NULL DEFAULT 'legacy'
 );
 CREATE TABLE IF NOT EXISTS fact_order (
     order_id       TEXT PRIMARY KEY,
@@ -79,7 +94,11 @@ CREATE TABLE IF NOT EXISTS fact_order (
     variable_costs_source TEXT NOT NULL DEFAULT 'none',        -- none | rate_estimate (оценка по ставке) | actual
     timestamp      TEXT NOT NULL,
     source_system  TEXT NOT NULL DEFAULT 'bot',                -- bot | base_xlsx
-    is_synthetic   INTEGER NOT NULL DEFAULT 0
+    is_synthetic   INTEGER NOT NULL DEFAULT 0,
+    source_bot_id INTEGER,
+    source_update_id INTEGER,
+    processed_at TEXT,
+    time_source TEXT NOT NULL DEFAULT 'legacy'
 );
 CREATE TABLE IF NOT EXISTS fact_order_item (
     item_id   INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -99,6 +118,25 @@ CREATE TABLE IF NOT EXISTS fact_attribution (
     window_days        INTEGER NOT NULL,
     calculated_at      TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS telegram_inbox (
+    queue_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bot_id INTEGER NOT NULL,
+    update_id INTEGER NOT NULL,
+    payload TEXT,
+    event_at TEXT NOT NULL,
+    received_at TEXT NOT NULL,
+    time_source TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending',
+    attempts INTEGER NOT NULL DEFAULT 0,
+    last_error TEXT,
+    processed_at TEXT,
+    UNIQUE(bot_id, update_id)
+);
+CREATE INDEX IF NOT EXISTS ix_inbox_pending ON telegram_inbox(bot_id, status, queue_id);
+CREATE TABLE IF NOT EXISTS telegram_polling (
+    bot_id INTEGER PRIMARY KEY,
+    next_offset INTEGER NOT NULL
+);
 CREATE INDEX IF NOT EXISTS ix_touch_user  ON fact_touch(user_id_hash, timestamp);
 CREATE INDEX IF NOT EXISTS ix_touch_pl    ON fact_touch(placement_id);
 CREATE INDEX IF NOT EXISTS ix_event_touch ON fact_bot_event(touch_id);
@@ -113,9 +151,19 @@ def now_msk() -> str:
     return datetime.now(MSK).strftime("%Y-%m-%d %H:%M:%S")
 
 
+class EventConnection(sqlite3.Connection):
+    # Existing domain functions commit independently outside update processing.
+    # Within one update the worker owns the only commit/rollback boundary.
+    processing_event = False
+
+    def commit(self):
+        if not self.processing_event:
+            super().commit()
+
+
 def connect(path: str) -> sqlite3.Connection:
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)   # папка может отсутствовать после клонирования
-    conn = sqlite3.connect(path, check_same_thread=False)
+    conn = sqlite3.connect(path, check_same_thread=False, factory=EventConnection)
     conn.row_factory = sqlite3.Row
     if conn.execute("SELECT 1 FROM sqlite_master WHERE name='events'").fetchone():
         raise SystemExit(f"{path} создан старой версией бота. Удалите этот файл, бот создаст новую базу.")
@@ -126,6 +174,18 @@ def connect(path: str) -> sqlite3.Connection:
 
 def migrate(conn):
     """Добавляет колонки, появившиеся в новых версиях, не трогая данные."""
+    for table in ("fact_touch", "fact_bot_event", "fact_lead", "fact_order"):
+        existing = {r[1] for r in conn.execute(f'PRAGMA table_info("{table}")')}
+        for name, kind in (("source_bot_id", "INTEGER"), ("source_update_id", "INTEGER"),
+                           ("processed_at", "TEXT"), ("time_source", "TEXT NOT NULL DEFAULT 'legacy'")):
+            if name not in existing:
+                conn.execute(f'ALTER TABLE "{table}" ADD COLUMN "{name}" {kind}')
+    conn.commit()
+    placement_cols = {r[1] for r in conn.execute("PRAGMA table_info(dim_placement)")}
+    if "cost_known" not in placement_cols:
+        conn.execute("ALTER TABLE dim_placement ADD COLUMN cost_known INTEGER NOT NULL DEFAULT 0")
+        conn.execute("UPDATE dim_placement SET cost_known=1 WHERE placement_type!='unknown' AND (cost>0 OR placement_type='own')")
+        conn.commit()
     cols = {r[1] for r in conn.execute("PRAGMA table_info(fact_order)")}
     if "variable_costs_source" not in cols:
         conn.execute("ALTER TABLE fact_order ADD COLUMN variable_costs_source TEXT NOT NULL DEFAULT 'none'")
@@ -148,12 +208,13 @@ def legacy_user_hash(student_id, salt: str) -> str:
 # ---------- Пользователи и касания ----------
 def upsert_user(conn, uid, username_hash=None, placement_id=None, source="bot", ts=None):
     conn.execute("INSERT OR IGNORE INTO dim_user VALUES (?,?,?,?,?)",
-                 (uid, username_hash, ts or now_msk(), placement_id, source))
+                 (uid, username_hash, ts or event_time(), placement_id, source))
 
 
 def add_touch(conn, uid, placement_id, ts=None) -> int:
     cur = conn.execute("INSERT INTO fact_touch(user_id_hash, placement_id, timestamp) VALUES (?,?,?)",
-                       (uid, placement_id, ts or now_msk()))
+                       (uid, placement_id, ts or event_time()))
+    audit(conn, "fact_touch", "touch_id", cur.lastrowid)
     conn.commit()
     return cur.lastrowid
 
@@ -165,8 +226,9 @@ def current_touch(conn, uid):
 
 
 def log_event(conn, uid, touch_id, event_type, item=None):
-    conn.execute("INSERT INTO fact_bot_event(user_id_hash, touch_id, event_type, item, timestamp) VALUES (?,?,?,?,?)",
-                 (uid, touch_id, event_type, item, now_msk()))
+    cur = conn.execute("INSERT INTO fact_bot_event(user_id_hash, touch_id, event_type, item, timestamp) VALUES (?,?,?,?,?)",
+                 (uid, touch_id, event_type, item, event_time()))
+    audit(conn, "fact_bot_event", "event_id", cur.lastrowid)
     conn.commit()
 
 
@@ -180,7 +242,8 @@ def last_self_source(conn, uid):
 def create_lead(conn, uid, touch_id, course_interest, self_source=None) -> int:
     cur = conn.execute("INSERT INTO fact_lead(user_id_hash, touch_id, course_interest, self_reported_source, "
                        "conversation_started_at) VALUES (?,?,?,?,?)",
-                       (uid, touch_id, course_interest, self_source, now_msk()))
+                       (uid, touch_id, course_interest, self_source, event_time()))
+    audit(conn, "fact_lead", "lead_id", cur.lastrowid)
     conn.commit()
     return cur.lastrowid
 
@@ -194,9 +257,12 @@ def get_lead(conn, lead_id):
 def add_placement(conn, placement_id, channel, cost, publication_time=None, campaign_name=None,
                   post_category=None, discount_value=None, creative=None, placement_type=None):
     ptype = placement_type or ("own" if cost == 0 else "external")
+    known = cost is not None and ptype != "unknown"
+    if known and (not math.isfinite(cost) or cost < 0):
+        raise ValueError("Стоимость должна быть конечным неотрицательным числом")
     conn.execute("INSERT OR REPLACE INTO dim_placement(placement_id, campaign_name, channel, placement_type, creative, "
-                 "post_category, discount_value, cost, publication_time, created_at) VALUES (?,?,?,?,?,?,?,?,?,?)",
-                 (placement_id, campaign_name, channel, ptype, creative, post_category, discount_value, cost,
+                 "post_category, discount_value, cost, cost_known, publication_time, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                 (placement_id, campaign_name, channel, ptype, creative, post_category, discount_value, cost if known else 0, int(known),
                   publication_time, now_msk()))
     conn.commit()
 
@@ -215,13 +281,15 @@ def add_order(conn, uid, amount, courses, acquiring_rate=0.0, ts=None, lead_id=N
         "INSERT OR IGNORE INTO fact_order(order_id, user_id_hash, lead_id, student_id, amount, variable_costs, "
         "variable_costs_source, timestamp, source_system) VALUES (?,?,?,?,?,?,?,?,?)",
         (order_id, uid, lead_id, student_id, amount, round(amount * acquiring_rate, 2),
-         "rate_estimate" if acquiring_rate else "none", ts or now_msk(), source))
+         "rate_estimate" if acquiring_rate else "none", ts or event_time(), source))
     if cur.rowcount == 0:
         return None
+    audit(conn, "fact_order", "order_id", order_id)
     courses = courses or ["не указан"]
-    share = round(amount / len(courses), 2)
+    total_cents = round(amount * 100)
+    share_cents, remainder = divmod(total_cents, len(courses))
     conn.executemany("INSERT INTO fact_order_item(order_id, course, amount) VALUES (?,?,?)",
-                     [(order_id, c, share) for c in courses])
+                     [(order_id, c, (share_cents + (i < remainder))/100) for i, c in enumerate(courses)])
     if lead_id:
         conn.execute("UPDATE fact_lead SET status='paid' WHERE lead_id=?", (lead_id,))
     if commit:

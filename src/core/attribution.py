@@ -33,7 +33,8 @@ def load(conn):
     leads = q("SELECT * FROM fact_lead")
     orders = q("SELECT * FROM fact_order")
     for df, col in [(touches, "timestamp"), (orders, "timestamp")]:
-        df[col] = pd.to_datetime(df[col])
+        # Backups may contain both ISO dates and ISO dates with time.
+        df[col] = pd.to_datetime(df[col], format="ISO8601")
     return pl, touches, events, leads, orders
 
 
@@ -102,6 +103,7 @@ def report(conn, model="last", window_days=30, persist=True) -> pd.DataFrame:
         rebuild(conn, window_days)      # основной расчёт сохраняем в fact_attribution
     pl, touches, events, leads, orders = load(conn)
     touches["key"] = touches.placement_id.fillna(ORGANIC_BOT)
+    events = events[events.event_type.isin(["view_direction", "view_course", "view_bundle"])]
     ev = events.merge(touches[["touch_id", "key"]], on="touch_id")
     ld = leads.merge(touches[["touch_id", "key"]], on="touch_id", how="left").fillna({"key": ORGANIC_BOT})
     # ФАКТ: оплаты, которые менеджер отметил по заявке, пришедшей по этой ссылке (без модели и окна)
@@ -117,23 +119,32 @@ def report(conn, model="last", window_days=30, persist=True) -> pd.DataFrame:
     att = compute(touches, orders, model, window_days).merge(orders[["order_id", "source_system"]], on="order_id")
     att["key"] = att.placement_id
     att.loc[att.key.isna(), "key"] = att.source_system.map({"bot": ORGANIC_BOT, "base_xlsx": HISTORY})
+    att["commission_known"] = att.order_id.map(orders.set_index("order_id").variable_costs_source).isin(["actual", "rate_estimate"])
     money = att.groupby("key").agg(orders=("weight", "sum"), revenue=("attributed_revenue", "sum"),
                                    margin=("attributed_margin", "sum"))
 
+    complete_commission = att.groupby("key").commission_known.all()
+    money.loc[~complete_commission, "margin"] = np.nan
     base = pl.set_index("placement_id")[["channel", "campaign_name", "post_category", "placement_type",
-                                         "publication_time", "cost"]]
+                                         "publication_time", "cost", "cost_known"]]
     extra = pd.DataFrame({"channel": ["Бот без рекламной метки", "История base.xlsx (источник неизвестен)"],
                           "placement_type": ["-", "-"], "cost": [0.0, 0.0]}, index=[ORGANIC_BOT, HISTORY])
     rep = pd.concat([base, extra]).join(funnel).join(money)
-    cols = ["cost", "starts", "viewed", "leads", "paid", "paid_revenue", "orders", "revenue", "margin"]
+    cols = ["starts", "viewed", "leads", "paid", "paid_revenue", "orders", "revenue"]
     rep[cols] = rep[cols].fillna(0).astype(float)
+    rep.loc[~rep.index.isin(money.index), "margin"] = 0.0
+    rep.loc[rep.cost_known.ne(1), "cost"] = np.nan
     rep = rep[(rep.index.isin(pl.placement_id)) | (rep[["starts", "orders"]].sum(axis=1) > 0)]
     rep["orders"] = rep.orders.round(6)
 
     paid = rep.cost > 0
-    rep["cpa"] = rep.cost.where(paid) / rep.orders.where(rep.orders > 0)
+    rep["cost_per_attributed_order"] = rep.cost / rep.orders.where(rep.orders > 0)
+    rep["cpa"] = rep.cost_per_attributed_order  # compatibility alias
     rep["romi"] = (rep.revenue - rep.cost) / rep.cost.where(paid)
     rep["romi_margin"] = (rep.margin - rep.cost) / rep.cost.where(paid)
+    rep["attributed_after_acquiring"] = rep.margin
+    rep["romi_after_acquiring_pct"] = 100 * rep.romi_margin
+    rep["attributed_romi_pct"] = 100 * rep.romi
     rep.index.name = "placement_id"
     rep = rep.sort_values(["cost", "revenue"], ascending=False)
     return pd.concat([rep.drop(index=HISTORY, errors="ignore"), rep.loc[rep.index == HISTORY]])  # история — в конец
@@ -154,8 +165,10 @@ def summary(conn, model="last", window_days=30) -> dict:
     rep = report(conn, model, window_days)
     ads = rep[~rep.index.isin([ORGANIC_BOT, HISTORY])]
     paid = ads[ads.cost > 0]
-    cost = float(paid.cost.sum())
-    attributed = float(paid.revenue.sum())
+    cost_complete = ads.cost.notna().all()
+    cost = float(ads.cost.sum()) if cost_complete else None
+    attributed = float(ads.revenue.sum())
+    after_acquiring = float(ads.margin.sum()) if ads.margin.notna().all() else None
     period = conn.execute("SELECT MIN(timestamp), MAX(timestamp) FROM fact_order").fetchone()
     return {
         "model": model, "window": window_days,
@@ -164,9 +177,10 @@ def summary(conn, model="last", window_days=30) -> dict:
         "revenue_bot": float(rep.drop(index=HISTORY, errors="ignore").revenue.sum()),
         "cost": cost,
         "attributed": attributed,
-        "margin": float(paid.margin.sum()),
+        "margin": after_acquiring,
+        "cost_complete": bool(cost_complete),
         "romi": (attributed - cost) / cost if cost else None,
-        "romi_margin": (float(paid.margin.sum()) - cost) / cost if cost else None,
+        "romi_margin": (after_acquiring - cost) / cost if cost and after_acquiring is not None else None,
         "placements": paid.sort_values("romi", ascending=False),
         "n_placements": len(ads),
     }
@@ -177,6 +191,10 @@ def stable_winners(conn, window_days=30, min_orders=1) -> tuple[list, list]:
     cmp_ = compare_models(conn, window_days)
     if cmp_.empty:
         return [], []
+    # Apply the documented minimum to every model's fractional order count.
+    sufficient = pd.concat([report(conn, m, window_days, persist=False).orders.ge(min_orders)
+                            for m in MODELS], axis=1).all(axis=1)
+    cmp_ = cmp_.loc[cmp_.index.intersection(sufficient[sufficient].index)]
     good = cmp_[(cmp_ > 0).all(axis=1)].index.tolist()
     bad = cmp_[(cmp_ < 0).all(axis=1)].index.tolist()
     return good, bad

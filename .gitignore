@@ -6,6 +6,10 @@ __pycache__/
 
 .env
 *.db
+*.db.lock
+*.db-journal
+*.db-wal
+*.db-shm
 *.session
 
 # C extensions
@@ -156,6 +160,8 @@ activemq-data/
 .env
 .envrc
 .venv
+.venv312/
+.settings-*
 env/
 venv/
 ENV/
@@ -221,3 +227,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local backup folders
+backups/
