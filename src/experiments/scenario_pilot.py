@@ -100,7 +100,7 @@ def generate_pilots(history_path, seed=42, n_users=1000):
                     last[u] = day
                     order_count[u] += 1
                     break
-        yield scenario, {
+        tables = {
             "users": pd.DataFrame({"user_id": users}),
             "placements": placements,
             "touches": pd.DataFrame(touch_rows, columns=["touch_id", "user_id", "placement_id", "day"]),
@@ -110,6 +110,34 @@ def generate_pilots(history_path, seed=42, n_users=1000):
             "items": pd.DataFrame(item_rows, columns=["order_id", "course", "amount", "discount_fraction"]),
             "mechanism_labels": pd.DataFrame(truth_rows, columns=["order_id", "mechanism", "driver_placement_id"]),
         }
+
+        add_event_details(tables)
+        yield scenario, tables
+
+
+def add_event_details(tables):
+    """Assign illustrative event times and link existing compatible leads to orders."""
+    for name, hour in [('placements', 9), ('touches', 10), ('views', 11), ('leads', 12), ('orders', 18)]:
+        frame = tables[name]
+        frame['timestamp'] = (pd.Timestamp('2025-01-01')
+                              + pd.to_timedelta(frame.day - 1, unit='D')
+                              + pd.Timedelta(hours=hour))
+    orders = tables['orders']
+    leads = tables['leads']
+    orders['lead_id'] = pd.Series(pd.NA, index=orders.index, dtype='Int64')
+    courses = tables['items'].groupby('order_id').course.agg(set)
+    previous = {}
+    for order in orders.sort_values(['timestamp', 'order_id']).itertuples():
+        eligible = leads.loc[
+            leads.user_id.eq(order.user_id)
+            & leads.course.isin(courses[order.order_id])
+            & leads.timestamp.le(order.timestamp)
+            & leads.timestamp.gt(previous.get(order.user_id, pd.Timestamp.min))
+        ]
+        if not eligible.empty:
+            latest = eligible.sort_values(['timestamp', 'lead_id']).iloc[-1]
+            orders.loc[order.Index, 'lead_id'] = latest.lead_id
+        previous[order.user_id] = order.timestamp
 
 
 def summarize(pilots):

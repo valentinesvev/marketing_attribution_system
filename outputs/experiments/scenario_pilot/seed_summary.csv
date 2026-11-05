@@ -1,0 +1,5 @@
+scenario,orders_min,orders_mean,orders_max,buyers_min,buyers_max,revenue_mean,revenue_std,linked_orders_mean,leads_without_linked_order_mean
+course_launch,155,171.0,183,154,178,1376778.8,89207.54595068599,14.0,166.4
+external_event,180,202.8,218,179,211,1676248.1,141411.25868660974,16.6,191.6
+flat,169,188.0,205,169,201,1554114.8,138589.76071230424,16.0,192.2
+zero_ad_effect,141,163.2,184,141,183,1355876.9,172786.618328576,10.2,198.0
