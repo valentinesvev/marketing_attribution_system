@@ -1,0 +1,5 @@
+scenario,buyers_pct,mean_touches_all,mean_touches_visitors,mean_ad_touches_all,zero_touches_pct
+flat,18.2,1.623,1.9437125748502995,1.303,16.5
+external_event,19.7,1.623,1.9437125748502995,1.303,16.5
+course_launch,16.2,1.458,1.8066914498141264,1.138,19.3
+zero_ad_effect,16.3,1.623,1.9437125748502995,1.303,16.5
