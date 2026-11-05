@@ -1,0 +1,5 @@
+scenario,users,visitors,touches,views,leads,leads_from_nonbuyers,buyers,orders,items,revenue_rub,ad_tagged_orders
+flat,1000,835,1623,828,205,167,182,185,209,1542859.75,23
+external_event,1000,835,1623,828,205,161,197,202,225,1672171.25,26
+course_launch,1000,807,1458,715,176,142,162,166,184,1362644.75,17
+zero_ad_effect,1000,835,1623,828,205,172,163,166,186,1384796.5,0
