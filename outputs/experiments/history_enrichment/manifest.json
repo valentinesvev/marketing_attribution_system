@@ -1,7 +1,7 @@
 {
   "experiment_only": true,
-  "contract_version": "1.3",
-  "as_of": "2026-11-06T07:05:50.558629+03:00",
+  "contract_version": "1.4",
+  "as_of": "2026-11-06T12:57:03.850939+03:00",
   "scope": "current_generation_only",
   "analysis_units": [
     "user",
@@ -80,7 +80,8 @@
     "BUYER_DELAY_SCALE_DAYS": 7.0,
     "NONBUYERS_PER_BUYER": 3.0,
     "NONBUYER_EXTRA_TOUCHES_LAMBDA": 1.0,
-    "NONBUYER_DELAY_SCALE_DAYS": 7.0,
+    "POST_ATTENTION_HALF_LIFE_DAYS": 7.0,
+    "NONBUYER_TIME_DISTRIBUTION": "uniform",
     "LEAD_PROBABILITY": 0.2,
     "TIMEZONE": "Europe/Moscow",
     "MIN_GAP_SECONDS": 1,

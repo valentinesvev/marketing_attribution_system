@@ -356,7 +356,7 @@ history_user_405,2026-08-25 13:16:31+03:00,895000,history_order_354,8950.0,,hist
 history_user_406,2026-08-10 18:30:49+03:00,450000,history_order_355,4500.0,,historical_purchase,,no_generated_touches,sampled_zero,unknown
 history_user_407,2026-09-07 08:21:23+03:00,422500,history_order_356,4225.0,,historical_purchase,69,has_generated_touches,,unknown
 history_user_408,2026-08-26 13:56:39+03:00,895000,history_order_357,8950.0,,historical_purchase,70,has_generated_touches,,unknown
-history_user_409,2026-08-10 13:55:50+03:00,649000,history_order_358,6490.0,,historical_purchase,71,has_generated_touches,,unknown
+history_user_409,2026-08-10 13:55:50+03:00,649000,history_order_358,6490.0,,historical_purchase,72,has_generated_touches,,unknown
 history_user_41,2026-08-08 20:00:19+03:00,999000,history_order_359,9990.0,,historical_purchase,73,has_generated_touches,,unknown
 history_user_410,2026-08-19 07:10:12+03:00,945000,history_order_360,9450.0,,historical_purchase,,has_generated_touches,,unknown
 history_user_411,2026-08-08 19:45:24+03:00,495000,history_order_361,4950.0,,historical_purchase,,has_generated_touches,,unknown
@@ -533,7 +533,7 @@ history_user_56,2026-08-23 16:50:14+03:00,895000,history_order_531,8950.0,,histo
 history_user_560,2026-09-05 17:42:39+03:00,845000,history_order_532,8450.0,,historical_purchase,,has_generated_touches,,unknown
 history_user_561,2026-08-18 16:34:39+03:00,874500,history_order_533,8745.0,,historical_purchase,,has_generated_touches,,unknown
 history_user_562,2026-09-06 19:17:57+03:00,895000,history_order_534,8950.0,,historical_purchase,,no_generated_touches,sampled_zero,unknown
-history_user_563,2026-08-26 07:26:53+03:00,895000,history_order_535,8950.0,,historical_purchase,107,has_generated_touches,,unknown
+history_user_563,2026-08-26 07:26:53+03:00,895000,history_order_535,8950.0,,historical_purchase,108,has_generated_touches,,unknown
 history_user_564,2026-08-10 18:36:00+03:00,645000,history_order_536,6450.0,,historical_purchase,109,has_generated_touches,,unknown
 history_user_565,2026-08-27 19:44:33+03:00,1395000,history_order_537,13950.0,,historical_purchase,,has_generated_touches,,unknown
 history_user_566,2026-08-09 18:47:09+03:00,999000,history_order_538,9990.0,,historical_purchase,110,has_generated_touches,,unknown
@@ -545,7 +545,7 @@ history_user_57,2026-09-04 15:26:00+03:00,845000,history_order_543,8450.0,,histo
 history_user_570,2026-08-13 05:36:55+03:00,874500,history_order_544,8745.0,,historical_purchase,,has_generated_touches,,unknown
 history_user_571,2026-08-10 18:01:06+03:00,649000,history_order_545,6490.0,,historical_purchase,,has_generated_touches,,unknown
 history_user_571,2026-09-05 17:04:40+03:00,895000,history_order_546,8950.0,2026-08-10 18:01:06+03:00,historical_purchase,,no_generated_touches,sampled_zero,unknown
-history_user_572,2026-09-08 17:53:12+03:00,1500000,history_order_547,15000.0,,historical_purchase,112,has_generated_touches,,unknown
+history_user_572,2026-09-08 17:53:12+03:00,1500000,history_order_547,15000.0,,historical_purchase,113,has_generated_touches,,unknown
 history_user_573,2026-08-22 04:22:43+03:00,695000,history_order_548,6950.0,,historical_purchase,,has_generated_touches,,unknown
 history_user_574,2026-08-08 14:07:56+03:00,495000,history_order_549,4950.0,,historical_purchase,,has_generated_touches,,unknown
 history_user_575,2026-08-18 19:10:04+03:00,847500,history_order_550,8475.0,,historical_purchase,,has_generated_touches,,unknown
