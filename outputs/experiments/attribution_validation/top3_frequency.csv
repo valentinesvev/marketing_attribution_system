@@ -1,0 +1,961 @@
+config,model,placement_id,top3_frequency
+Базовое,first,history_post_1829,1.0
+Базовое,first,history_post_1830,0.8
+Базовое,first,history_post_1831,0.5
+Базовое,first,history_post_1833,0.5
+Базовое,first,history_post_1834,0.2
+Базовое,first,history_post_1836,0.0
+Базовое,first,history_post_1837,0.0
+Базовое,first,history_post_1838,0.0
+Базовое,first,history_post_1840,0.0
+Базовое,first,history_post_1842,0.0
+Базовое,first,history_post_1843,0.0
+Базовое,first,history_post_1844,0.0
+Базовое,first,history_post_1845,0.0
+Базовое,first,history_post_1846,0.0
+Базовое,first,history_post_1847,0.0
+Базовое,first,history_post_1848,0.0
+Базовое,first,history_post_1849,0.0
+Базовое,first,history_post_1852,0.0
+Базовое,first,history_post_1853,0.0
+Базовое,first,history_post_1854,0.0
+Базовое,first,history_post_1855,0.0
+Базовое,first,history_post_1856,0.0
+Базовое,first,history_post_1857,0.0
+Базовое,first,history_post_1859,0.0
+Базовое,first,history_post_1860,0.0
+Базовое,first,history_post_1863,0.0
+Базовое,first,history_post_1865,0.0
+Базовое,first,history_post_1866,0.0
+Базовое,first,history_post_1868,0.0
+Базовое,first,history_post_1869,0.0
+Базовое,first,history_post_1870,0.0
+Базовое,first,history_post_1872,0.0
+Базовое,first,history_post_1874,0.0
+Базовое,first,history_post_1875,0.0
+Базовое,first,history_post_1876,0.0
+Базовое,first,history_post_1877,0.0
+Базовое,first,history_post_1878,0.0
+Базовое,first,history_post_1880,0.0
+Базовое,first,history_post_1881,0.0
+Базовое,first,history_post_1882,0.0
+Базовое,first,history_post_1885,0.0
+Базовое,first,history_post_1887,0.0
+Базовое,first,history_post_1892,0.0
+Базовое,first,history_post_1893,0.0
+Базовое,first,history_post_1895,0.0
+Базовое,first,history_post_1897,0.0
+Базовое,first,history_post_1898,0.0
+Базовое,first,history_post_1899,0.0
+Базовое,last,history_post_1829,0.85
+Базовое,last,history_post_1830,0.6
+Базовое,last,history_post_1831,0.3
+Базовое,last,history_post_1833,0.45
+Базовое,last,history_post_1834,0.6
+Базовое,last,history_post_1836,0.15
+Базовое,last,history_post_1837,0.0
+Базовое,last,history_post_1838,0.0
+Базовое,last,history_post_1840,0.0
+Базовое,last,history_post_1842,0.05
+Базовое,last,history_post_1843,0.0
+Базовое,last,history_post_1844,0.0
+Базовое,last,history_post_1845,0.0
+Базовое,last,history_post_1846,0.0
+Базовое,last,history_post_1847,0.0
+Базовое,last,history_post_1848,0.0
+Базовое,last,history_post_1849,0.0
+Базовое,last,history_post_1852,0.0
+Базовое,last,history_post_1853,0.0
+Базовое,last,history_post_1854,0.0
+Базовое,last,history_post_1855,0.0
+Базовое,last,history_post_1856,0.0
+Базовое,last,history_post_1857,0.0
+Базовое,last,history_post_1859,0.0
+Базовое,last,history_post_1860,0.0
+Базовое,last,history_post_1863,0.0
+Базовое,last,history_post_1865,0.0
+Базовое,last,history_post_1866,0.0
+Базовое,last,history_post_1868,0.0
+Базовое,last,history_post_1869,0.0
+Базовое,last,history_post_1870,0.0
+Базовое,last,history_post_1872,0.0
+Базовое,last,history_post_1874,0.0
+Базовое,last,history_post_1875,0.0
+Базовое,last,history_post_1876,0.0
+Базовое,last,history_post_1877,0.0
+Базовое,last,history_post_1878,0.0
+Базовое,last,history_post_1880,0.0
+Базовое,last,history_post_1881,0.0
+Базовое,last,history_post_1882,0.0
+Базовое,last,history_post_1885,0.0
+Базовое,last,history_post_1887,0.0
+Базовое,last,history_post_1892,0.0
+Базовое,last,history_post_1893,0.0
+Базовое,last,history_post_1895,0.0
+Базовое,last,history_post_1897,0.0
+Базовое,last,history_post_1898,0.0
+Базовое,last,history_post_1899,0.0
+Базовое,linear,history_post_1829,0.95
+Базовое,linear,history_post_1830,0.7
+Базовое,linear,history_post_1831,0.5
+Базовое,linear,history_post_1833,0.4
+Базовое,linear,history_post_1834,0.45
+Базовое,linear,history_post_1836,0.0
+Базовое,linear,history_post_1837,0.0
+Базовое,linear,history_post_1838,0.0
+Базовое,linear,history_post_1840,0.0
+Базовое,linear,history_post_1842,0.0
+Базовое,linear,history_post_1843,0.0
+Базовое,linear,history_post_1844,0.0
+Базовое,linear,history_post_1845,0.0
+Базовое,linear,history_post_1846,0.0
+Базовое,linear,history_post_1847,0.0
+Базовое,linear,history_post_1848,0.0
+Базовое,linear,history_post_1849,0.0
+Базовое,linear,history_post_1852,0.0
+Базовое,linear,history_post_1853,0.0
+Базовое,linear,history_post_1854,0.0
+Базовое,linear,history_post_1855,0.0
+Базовое,linear,history_post_1856,0.0
+Базовое,linear,history_post_1857,0.0
+Базовое,linear,history_post_1859,0.0
+Базовое,linear,history_post_1860,0.0
+Базовое,linear,history_post_1863,0.0
+Базовое,linear,history_post_1865,0.0
+Базовое,linear,history_post_1866,0.0
+Базовое,linear,history_post_1868,0.0
+Базовое,linear,history_post_1869,0.0
+Базовое,linear,history_post_1870,0.0
+Базовое,linear,history_post_1872,0.0
+Базовое,linear,history_post_1874,0.0
+Базовое,linear,history_post_1875,0.0
+Базовое,linear,history_post_1876,0.0
+Базовое,linear,history_post_1877,0.0
+Базовое,linear,history_post_1878,0.0
+Базовое,linear,history_post_1880,0.0
+Базовое,linear,history_post_1881,0.0
+Базовое,linear,history_post_1882,0.0
+Базовое,linear,history_post_1885,0.0
+Базовое,linear,history_post_1887,0.0
+Базовое,linear,history_post_1892,0.0
+Базовое,linear,history_post_1893,0.0
+Базовое,linear,history_post_1895,0.0
+Базовое,linear,history_post_1897,0.0
+Базовое,linear,history_post_1898,0.0
+Базовое,linear,history_post_1899,0.0
+Базовое,position,history_post_1829,0.95
+Базовое,position,history_post_1830,0.7
+Базовое,position,history_post_1831,0.5
+Базовое,position,history_post_1833,0.45
+Базовое,position,history_post_1834,0.4
+Базовое,position,history_post_1836,0.0
+Базовое,position,history_post_1837,0.0
+Базовое,position,history_post_1838,0.0
+Базовое,position,history_post_1840,0.0
+Базовое,position,history_post_1842,0.0
+Базовое,position,history_post_1843,0.0
+Базовое,position,history_post_1844,0.0
+Базовое,position,history_post_1845,0.0
+Базовое,position,history_post_1846,0.0
+Базовое,position,history_post_1847,0.0
+Базовое,position,history_post_1848,0.0
+Базовое,position,history_post_1849,0.0
+Базовое,position,history_post_1852,0.0
+Базовое,position,history_post_1853,0.0
+Базовое,position,history_post_1854,0.0
+Базовое,position,history_post_1855,0.0
+Базовое,position,history_post_1856,0.0
+Базовое,position,history_post_1857,0.0
+Базовое,position,history_post_1859,0.0
+Базовое,position,history_post_1860,0.0
+Базовое,position,history_post_1863,0.0
+Базовое,position,history_post_1865,0.0
+Базовое,position,history_post_1866,0.0
+Базовое,position,history_post_1868,0.0
+Базовое,position,history_post_1869,0.0
+Базовое,position,history_post_1870,0.0
+Базовое,position,history_post_1872,0.0
+Базовое,position,history_post_1874,0.0
+Базовое,position,history_post_1875,0.0
+Базовое,position,history_post_1876,0.0
+Базовое,position,history_post_1877,0.0
+Базовое,position,history_post_1878,0.0
+Базовое,position,history_post_1880,0.0
+Базовое,position,history_post_1881,0.0
+Базовое,position,history_post_1882,0.0
+Базовое,position,history_post_1885,0.0
+Базовое,position,history_post_1887,0.0
+Базовое,position,history_post_1892,0.0
+Базовое,position,history_post_1893,0.0
+Базовое,position,history_post_1895,0.0
+Базовое,position,history_post_1897,0.0
+Базовое,position,history_post_1898,0.0
+Базовое,position,history_post_1899,0.0
+Ближе к покупке,first,history_post_1829,1.0
+Ближе к покупке,first,history_post_1830,0.75
+Ближе к покупке,first,history_post_1831,0.55
+Ближе к покупке,first,history_post_1833,0.4
+Ближе к покупке,first,history_post_1834,0.25
+Ближе к покупке,first,history_post_1836,0.0
+Ближе к покупке,first,history_post_1837,0.0
+Ближе к покупке,first,history_post_1838,0.0
+Ближе к покупке,first,history_post_1840,0.0
+Ближе к покупке,first,history_post_1842,0.05
+Ближе к покупке,first,history_post_1843,0.0
+Ближе к покупке,first,history_post_1844,0.0
+Ближе к покупке,first,history_post_1845,0.0
+Ближе к покупке,first,history_post_1846,0.0
+Ближе к покупке,first,history_post_1847,0.0
+Ближе к покупке,first,history_post_1848,0.0
+Ближе к покупке,first,history_post_1849,0.0
+Ближе к покупке,first,history_post_1852,0.0
+Ближе к покупке,first,history_post_1853,0.0
+Ближе к покупке,first,history_post_1854,0.0
+Ближе к покупке,first,history_post_1855,0.0
+Ближе к покупке,first,history_post_1856,0.0
+Ближе к покупке,first,history_post_1857,0.0
+Ближе к покупке,first,history_post_1859,0.0
+Ближе к покупке,first,history_post_1860,0.0
+Ближе к покупке,first,history_post_1863,0.0
+Ближе к покупке,first,history_post_1865,0.0
+Ближе к покупке,first,history_post_1866,0.0
+Ближе к покупке,first,history_post_1868,0.0
+Ближе к покупке,first,history_post_1869,0.0
+Ближе к покупке,first,history_post_1870,0.0
+Ближе к покупке,first,history_post_1872,0.0
+Ближе к покупке,first,history_post_1874,0.0
+Ближе к покупке,first,history_post_1875,0.0
+Ближе к покупке,first,history_post_1876,0.0
+Ближе к покупке,first,history_post_1877,0.0
+Ближе к покупке,first,history_post_1878,0.0
+Ближе к покупке,first,history_post_1880,0.0
+Ближе к покупке,first,history_post_1881,0.0
+Ближе к покупке,first,history_post_1882,0.0
+Ближе к покупке,first,history_post_1885,0.0
+Ближе к покупке,first,history_post_1887,0.0
+Ближе к покупке,first,history_post_1892,0.0
+Ближе к покупке,first,history_post_1893,0.0
+Ближе к покупке,first,history_post_1895,0.0
+Ближе к покупке,first,history_post_1897,0.0
+Ближе к покупке,first,history_post_1898,0.0
+Ближе к покупке,first,history_post_1899,0.0
+Ближе к покупке,last,history_post_1829,0.9
+Ближе к покупке,last,history_post_1830,0.65
+Ближе к покупке,last,history_post_1831,0.35
+Ближе к покупке,last,history_post_1833,0.35
+Ближе к покупке,last,history_post_1834,0.55
+Ближе к покупке,last,history_post_1836,0.15
+Ближе к покупке,last,history_post_1837,0.0
+Ближе к покупке,last,history_post_1838,0.05
+Ближе к покупке,last,history_post_1840,0.0
+Ближе к покупке,last,history_post_1842,0.0
+Ближе к покупке,last,history_post_1843,0.0
+Ближе к покупке,last,history_post_1844,0.0
+Ближе к покупке,last,history_post_1845,0.0
+Ближе к покупке,last,history_post_1846,0.0
+Ближе к покупке,last,history_post_1847,0.0
+Ближе к покупке,last,history_post_1848,0.0
+Ближе к покупке,last,history_post_1849,0.0
+Ближе к покупке,last,history_post_1852,0.0
+Ближе к покупке,last,history_post_1853,0.0
+Ближе к покупке,last,history_post_1854,0.0
+Ближе к покупке,last,history_post_1855,0.0
+Ближе к покупке,last,history_post_1856,0.0
+Ближе к покупке,last,history_post_1857,0.0
+Ближе к покупке,last,history_post_1859,0.0
+Ближе к покупке,last,history_post_1860,0.0
+Ближе к покупке,last,history_post_1863,0.0
+Ближе к покупке,last,history_post_1865,0.0
+Ближе к покупке,last,history_post_1866,0.0
+Ближе к покупке,last,history_post_1868,0.0
+Ближе к покупке,last,history_post_1869,0.0
+Ближе к покупке,last,history_post_1870,0.0
+Ближе к покупке,last,history_post_1872,0.0
+Ближе к покупке,last,history_post_1874,0.0
+Ближе к покупке,last,history_post_1875,0.0
+Ближе к покупке,last,history_post_1876,0.0
+Ближе к покупке,last,history_post_1877,0.0
+Ближе к покупке,last,history_post_1878,0.0
+Ближе к покупке,last,history_post_1880,0.0
+Ближе к покупке,last,history_post_1881,0.0
+Ближе к покупке,last,history_post_1882,0.0
+Ближе к покупке,last,history_post_1885,0.0
+Ближе к покупке,last,history_post_1887,0.0
+Ближе к покупке,last,history_post_1892,0.0
+Ближе к покупке,last,history_post_1893,0.0
+Ближе к покупке,last,history_post_1895,0.0
+Ближе к покупке,last,history_post_1897,0.0
+Ближе к покупке,last,history_post_1898,0.0
+Ближе к покупке,last,history_post_1899,0.0
+Ближе к покупке,linear,history_post_1829,0.95
+Ближе к покупке,linear,history_post_1830,0.7
+Ближе к покупке,linear,history_post_1831,0.5
+Ближе к покупке,linear,history_post_1833,0.4
+Ближе к покупке,linear,history_post_1834,0.45
+Ближе к покупке,linear,history_post_1836,0.0
+Ближе к покупке,linear,history_post_1837,0.0
+Ближе к покупке,linear,history_post_1838,0.0
+Ближе к покупке,linear,history_post_1840,0.0
+Ближе к покупке,linear,history_post_1842,0.0
+Ближе к покупке,linear,history_post_1843,0.0
+Ближе к покупке,linear,history_post_1844,0.0
+Ближе к покупке,linear,history_post_1845,0.0
+Ближе к покупке,linear,history_post_1846,0.0
+Ближе к покупке,linear,history_post_1847,0.0
+Ближе к покупке,linear,history_post_1848,0.0
+Ближе к покупке,linear,history_post_1849,0.0
+Ближе к покупке,linear,history_post_1852,0.0
+Ближе к покупке,linear,history_post_1853,0.0
+Ближе к покупке,linear,history_post_1854,0.0
+Ближе к покупке,linear,history_post_1855,0.0
+Ближе к покупке,linear,history_post_1856,0.0
+Ближе к покупке,linear,history_post_1857,0.0
+Ближе к покупке,linear,history_post_1859,0.0
+Ближе к покупке,linear,history_post_1860,0.0
+Ближе к покупке,linear,history_post_1863,0.0
+Ближе к покупке,linear,history_post_1865,0.0
+Ближе к покупке,linear,history_post_1866,0.0
+Ближе к покупке,linear,history_post_1868,0.0
+Ближе к покупке,linear,history_post_1869,0.0
+Ближе к покупке,linear,history_post_1870,0.0
+Ближе к покупке,linear,history_post_1872,0.0
+Ближе к покупке,linear,history_post_1874,0.0
+Ближе к покупке,linear,history_post_1875,0.0
+Ближе к покупке,linear,history_post_1876,0.0
+Ближе к покупке,linear,history_post_1877,0.0
+Ближе к покупке,linear,history_post_1878,0.0
+Ближе к покупке,linear,history_post_1880,0.0
+Ближе к покупке,linear,history_post_1881,0.0
+Ближе к покупке,linear,history_post_1882,0.0
+Ближе к покупке,linear,history_post_1885,0.0
+Ближе к покупке,linear,history_post_1887,0.0
+Ближе к покупке,linear,history_post_1892,0.0
+Ближе к покупке,linear,history_post_1893,0.0
+Ближе к покупке,linear,history_post_1895,0.0
+Ближе к покупке,linear,history_post_1897,0.0
+Ближе к покупке,linear,history_post_1898,0.0
+Ближе к покупке,linear,history_post_1899,0.0
+Ближе к покупке,position,history_post_1829,0.95
+Ближе к покупке,position,history_post_1830,0.7
+Ближе к покупке,position,history_post_1831,0.5
+Ближе к покупке,position,history_post_1833,0.45
+Ближе к покупке,position,history_post_1834,0.4
+Ближе к покупке,position,history_post_1836,0.0
+Ближе к покупке,position,history_post_1837,0.0
+Ближе к покупке,position,history_post_1838,0.0
+Ближе к покупке,position,history_post_1840,0.0
+Ближе к покупке,position,history_post_1842,0.0
+Ближе к покупке,position,history_post_1843,0.0
+Ближе к покупке,position,history_post_1844,0.0
+Ближе к покупке,position,history_post_1845,0.0
+Ближе к покупке,position,history_post_1846,0.0
+Ближе к покупке,position,history_post_1847,0.0
+Ближе к покупке,position,history_post_1848,0.0
+Ближе к покупке,position,history_post_1849,0.0
+Ближе к покупке,position,history_post_1852,0.0
+Ближе к покупке,position,history_post_1853,0.0
+Ближе к покупке,position,history_post_1854,0.0
+Ближе к покупке,position,history_post_1855,0.0
+Ближе к покупке,position,history_post_1856,0.0
+Ближе к покупке,position,history_post_1857,0.0
+Ближе к покупке,position,history_post_1859,0.0
+Ближе к покупке,position,history_post_1860,0.0
+Ближе к покупке,position,history_post_1863,0.0
+Ближе к покупке,position,history_post_1865,0.0
+Ближе к покупке,position,history_post_1866,0.0
+Ближе к покупке,position,history_post_1868,0.0
+Ближе к покупке,position,history_post_1869,0.0
+Ближе к покупке,position,history_post_1870,0.0
+Ближе к покупке,position,history_post_1872,0.0
+Ближе к покупке,position,history_post_1874,0.0
+Ближе к покупке,position,history_post_1875,0.0
+Ближе к покупке,position,history_post_1876,0.0
+Ближе к покупке,position,history_post_1877,0.0
+Ближе к покупке,position,history_post_1878,0.0
+Ближе к покупке,position,history_post_1880,0.0
+Ближе к покупке,position,history_post_1881,0.0
+Ближе к покупке,position,history_post_1882,0.0
+Ближе к покупке,position,history_post_1885,0.0
+Ближе к покупке,position,history_post_1887,0.0
+Ближе к покупке,position,history_post_1892,0.0
+Ближе к покупке,position,history_post_1893,0.0
+Ближе к покупке,position,history_post_1895,0.0
+Ближе к покупке,position,history_post_1897,0.0
+Ближе к покупке,position,history_post_1898,0.0
+Ближе к покупке,position,history_post_1899,0.0
+Больше касаний,first,history_post_1829,1.0
+Больше касаний,first,history_post_1830,0.95
+Больше касаний,first,history_post_1831,0.7
+Больше касаний,first,history_post_1833,0.25
+Больше касаний,first,history_post_1834,0.05
+Больше касаний,first,history_post_1836,0.05
+Больше касаний,first,history_post_1837,0.0
+Больше касаний,first,history_post_1838,0.0
+Больше касаний,first,history_post_1840,0.0
+Больше касаний,first,history_post_1842,0.0
+Больше касаний,first,history_post_1843,0.0
+Больше касаний,first,history_post_1844,0.0
+Больше касаний,first,history_post_1845,0.0
+Больше касаний,first,history_post_1846,0.0
+Больше касаний,first,history_post_1847,0.0
+Больше касаний,first,history_post_1848,0.0
+Больше касаний,first,history_post_1849,0.0
+Больше касаний,first,history_post_1852,0.0
+Больше касаний,first,history_post_1853,0.0
+Больше касаний,first,history_post_1854,0.0
+Больше касаний,first,history_post_1855,0.0
+Больше касаний,first,history_post_1856,0.0
+Больше касаний,first,history_post_1857,0.0
+Больше касаний,first,history_post_1859,0.0
+Больше касаний,first,history_post_1860,0.0
+Больше касаний,first,history_post_1863,0.0
+Больше касаний,first,history_post_1865,0.0
+Больше касаний,first,history_post_1866,0.0
+Больше касаний,first,history_post_1868,0.0
+Больше касаний,first,history_post_1869,0.0
+Больше касаний,first,history_post_1870,0.0
+Больше касаний,first,history_post_1872,0.0
+Больше касаний,first,history_post_1874,0.0
+Больше касаний,first,history_post_1875,0.0
+Больше касаний,first,history_post_1876,0.0
+Больше касаний,first,history_post_1877,0.0
+Больше касаний,first,history_post_1878,0.0
+Больше касаний,first,history_post_1880,0.0
+Больше касаний,first,history_post_1881,0.0
+Больше касаний,first,history_post_1882,0.0
+Больше касаний,first,history_post_1885,0.0
+Больше касаний,first,history_post_1887,0.0
+Больше касаний,first,history_post_1892,0.0
+Больше касаний,first,history_post_1893,0.0
+Больше касаний,first,history_post_1895,0.0
+Больше касаний,first,history_post_1897,0.0
+Больше касаний,first,history_post_1898,0.0
+Больше касаний,first,history_post_1899,0.0
+Больше касаний,last,history_post_1829,0.55
+Больше касаний,last,history_post_1830,0.35
+Больше касаний,last,history_post_1831,0.35
+Больше касаний,last,history_post_1833,0.55
+Больше касаний,last,history_post_1834,0.85
+Больше касаний,last,history_post_1836,0.3
+Больше касаний,last,history_post_1837,0.05
+Больше касаний,last,history_post_1838,0.0
+Больше касаний,last,history_post_1840,0.0
+Больше касаний,last,history_post_1842,0.0
+Больше касаний,last,history_post_1843,0.0
+Больше касаний,last,history_post_1844,0.0
+Больше касаний,last,history_post_1845,0.0
+Больше касаний,last,history_post_1846,0.0
+Больше касаний,last,history_post_1847,0.0
+Больше касаний,last,history_post_1848,0.0
+Больше касаний,last,history_post_1849,0.0
+Больше касаний,last,history_post_1852,0.0
+Больше касаний,last,history_post_1853,0.0
+Больше касаний,last,history_post_1854,0.0
+Больше касаний,last,history_post_1855,0.0
+Больше касаний,last,history_post_1856,0.0
+Больше касаний,last,history_post_1857,0.0
+Больше касаний,last,history_post_1859,0.0
+Больше касаний,last,history_post_1860,0.0
+Больше касаний,last,history_post_1863,0.0
+Больше касаний,last,history_post_1865,0.0
+Больше касаний,last,history_post_1866,0.0
+Больше касаний,last,history_post_1868,0.0
+Больше касаний,last,history_post_1869,0.0
+Больше касаний,last,history_post_1870,0.0
+Больше касаний,last,history_post_1872,0.0
+Больше касаний,last,history_post_1874,0.0
+Больше касаний,last,history_post_1875,0.0
+Больше касаний,last,history_post_1876,0.0
+Больше касаний,last,history_post_1877,0.0
+Больше касаний,last,history_post_1878,0.0
+Больше касаний,last,history_post_1880,0.0
+Больше касаний,last,history_post_1881,0.0
+Больше касаний,last,history_post_1882,0.0
+Больше касаний,last,history_post_1885,0.0
+Больше касаний,last,history_post_1887,0.0
+Больше касаний,last,history_post_1892,0.0
+Больше касаний,last,history_post_1893,0.0
+Больше касаний,last,history_post_1895,0.0
+Больше касаний,last,history_post_1897,0.0
+Больше касаний,last,history_post_1898,0.0
+Больше касаний,last,history_post_1899,0.0
+Больше касаний,linear,history_post_1829,0.9
+Больше касаний,linear,history_post_1830,0.75
+Больше касаний,linear,history_post_1831,0.6
+Больше касаний,linear,history_post_1833,0.45
+Больше касаний,linear,history_post_1834,0.25
+Больше касаний,linear,history_post_1836,0.05
+Больше касаний,linear,history_post_1837,0.0
+Больше касаний,linear,history_post_1838,0.0
+Больше касаний,linear,history_post_1840,0.0
+Больше касаний,linear,history_post_1842,0.0
+Больше касаний,linear,history_post_1843,0.0
+Больше касаний,linear,history_post_1844,0.0
+Больше касаний,linear,history_post_1845,0.0
+Больше касаний,linear,history_post_1846,0.0
+Больше касаний,linear,history_post_1847,0.0
+Больше касаний,linear,history_post_1848,0.0
+Больше касаний,linear,history_post_1849,0.0
+Больше касаний,linear,history_post_1852,0.0
+Больше касаний,linear,history_post_1853,0.0
+Больше касаний,linear,history_post_1854,0.0
+Больше касаний,linear,history_post_1855,0.0
+Больше касаний,linear,history_post_1856,0.0
+Больше касаний,linear,history_post_1857,0.0
+Больше касаний,linear,history_post_1859,0.0
+Больше касаний,linear,history_post_1860,0.0
+Больше касаний,linear,history_post_1863,0.0
+Больше касаний,linear,history_post_1865,0.0
+Больше касаний,linear,history_post_1866,0.0
+Больше касаний,linear,history_post_1868,0.0
+Больше касаний,linear,history_post_1869,0.0
+Больше касаний,linear,history_post_1870,0.0
+Больше касаний,linear,history_post_1872,0.0
+Больше касаний,linear,history_post_1874,0.0
+Больше касаний,linear,history_post_1875,0.0
+Больше касаний,linear,history_post_1876,0.0
+Больше касаний,linear,history_post_1877,0.0
+Больше касаний,linear,history_post_1878,0.0
+Больше касаний,linear,history_post_1880,0.0
+Больше касаний,linear,history_post_1881,0.0
+Больше касаний,linear,history_post_1882,0.0
+Больше касаний,linear,history_post_1885,0.0
+Больше касаний,linear,history_post_1887,0.0
+Больше касаний,linear,history_post_1892,0.0
+Больше касаний,linear,history_post_1893,0.0
+Больше касаний,linear,history_post_1895,0.0
+Больше касаний,linear,history_post_1897,0.0
+Больше касаний,linear,history_post_1898,0.0
+Больше касаний,linear,history_post_1899,0.0
+Больше касаний,position,history_post_1829,0.95
+Больше касаний,position,history_post_1830,0.75
+Больше касаний,position,history_post_1831,0.65
+Больше касаний,position,history_post_1833,0.35
+Больше касаний,position,history_post_1834,0.25
+Больше касаний,position,history_post_1836,0.05
+Больше касаний,position,history_post_1837,0.0
+Больше касаний,position,history_post_1838,0.0
+Больше касаний,position,history_post_1840,0.0
+Больше касаний,position,history_post_1842,0.0
+Больше касаний,position,history_post_1843,0.0
+Больше касаний,position,history_post_1844,0.0
+Больше касаний,position,history_post_1845,0.0
+Больше касаний,position,history_post_1846,0.0
+Больше касаний,position,history_post_1847,0.0
+Больше касаний,position,history_post_1848,0.0
+Больше касаний,position,history_post_1849,0.0
+Больше касаний,position,history_post_1852,0.0
+Больше касаний,position,history_post_1853,0.0
+Больше касаний,position,history_post_1854,0.0
+Больше касаний,position,history_post_1855,0.0
+Больше касаний,position,history_post_1856,0.0
+Больше касаний,position,history_post_1857,0.0
+Больше касаний,position,history_post_1859,0.0
+Больше касаний,position,history_post_1860,0.0
+Больше касаний,position,history_post_1863,0.0
+Больше касаний,position,history_post_1865,0.0
+Больше касаний,position,history_post_1866,0.0
+Больше касаний,position,history_post_1868,0.0
+Больше касаний,position,history_post_1869,0.0
+Больше касаний,position,history_post_1870,0.0
+Больше касаний,position,history_post_1872,0.0
+Больше касаний,position,history_post_1874,0.0
+Больше касаний,position,history_post_1875,0.0
+Больше касаний,position,history_post_1876,0.0
+Больше касаний,position,history_post_1877,0.0
+Больше касаний,position,history_post_1878,0.0
+Больше касаний,position,history_post_1880,0.0
+Больше касаний,position,history_post_1881,0.0
+Больше касаний,position,history_post_1882,0.0
+Больше касаний,position,history_post_1885,0.0
+Больше касаний,position,history_post_1887,0.0
+Больше касаний,position,history_post_1892,0.0
+Больше касаний,position,history_post_1893,0.0
+Больше касаний,position,history_post_1895,0.0
+Больше касаний,position,history_post_1897,0.0
+Больше касаний,position,history_post_1898,0.0
+Больше касаний,position,history_post_1899,0.0
+Дальше от покупки,first,history_post_1829,1.0
+Дальше от покупки,first,history_post_1830,0.75
+Дальше от покупки,first,history_post_1831,0.5
+Дальше от покупки,first,history_post_1833,0.45
+Дальше от покупки,first,history_post_1834,0.25
+Дальше от покупки,first,history_post_1836,0.0
+Дальше от покупки,first,history_post_1837,0.0
+Дальше от покупки,first,history_post_1838,0.05
+Дальше от покупки,first,history_post_1840,0.0
+Дальше от покупки,first,history_post_1842,0.0
+Дальше от покупки,first,history_post_1843,0.0
+Дальше от покупки,first,history_post_1844,0.0
+Дальше от покупки,first,history_post_1845,0.0
+Дальше от покупки,first,history_post_1846,0.0
+Дальше от покупки,first,history_post_1847,0.0
+Дальше от покупки,first,history_post_1848,0.0
+Дальше от покупки,first,history_post_1849,0.0
+Дальше от покупки,first,history_post_1852,0.0
+Дальше от покупки,first,history_post_1853,0.0
+Дальше от покупки,first,history_post_1854,0.0
+Дальше от покупки,first,history_post_1855,0.0
+Дальше от покупки,first,history_post_1856,0.0
+Дальше от покупки,first,history_post_1857,0.0
+Дальше от покупки,first,history_post_1859,0.0
+Дальше от покупки,first,history_post_1860,0.0
+Дальше от покупки,first,history_post_1863,0.0
+Дальше от покупки,first,history_post_1865,0.0
+Дальше от покупки,first,history_post_1866,0.0
+Дальше от покупки,first,history_post_1868,0.0
+Дальше от покупки,first,history_post_1869,0.0
+Дальше от покупки,first,history_post_1870,0.0
+Дальше от покупки,first,history_post_1872,0.0
+Дальше от покупки,first,history_post_1874,0.0
+Дальше от покупки,first,history_post_1875,0.0
+Дальше от покупки,first,history_post_1876,0.0
+Дальше от покупки,first,history_post_1877,0.0
+Дальше от покупки,first,history_post_1878,0.0
+Дальше от покупки,first,history_post_1880,0.0
+Дальше от покупки,first,history_post_1881,0.0
+Дальше от покупки,first,history_post_1882,0.0
+Дальше от покупки,first,history_post_1885,0.0
+Дальше от покупки,first,history_post_1887,0.0
+Дальше от покупки,first,history_post_1892,0.0
+Дальше от покупки,first,history_post_1893,0.0
+Дальше от покупки,first,history_post_1895,0.0
+Дальше от покупки,first,history_post_1897,0.0
+Дальше от покупки,first,history_post_1898,0.0
+Дальше от покупки,first,history_post_1899,0.0
+Дальше от покупки,last,history_post_1829,0.75
+Дальше от покупки,last,history_post_1830,0.6
+Дальше от покупки,last,history_post_1831,0.3
+Дальше от покупки,last,history_post_1833,0.55
+Дальше от покупки,last,history_post_1834,0.6
+Дальше от покупки,last,history_post_1836,0.15
+Дальше от покупки,last,history_post_1837,0.0
+Дальше от покупки,last,history_post_1838,0.0
+Дальше от покупки,last,history_post_1840,0.0
+Дальше от покупки,last,history_post_1842,0.05
+Дальше от покупки,last,history_post_1843,0.0
+Дальше от покупки,last,history_post_1844,0.0
+Дальше от покупки,last,history_post_1845,0.0
+Дальше от покупки,last,history_post_1846,0.0
+Дальше от покупки,last,history_post_1847,0.0
+Дальше от покупки,last,history_post_1848,0.0
+Дальше от покупки,last,history_post_1849,0.0
+Дальше от покупки,last,history_post_1852,0.0
+Дальше от покупки,last,history_post_1853,0.0
+Дальше от покупки,last,history_post_1854,0.0
+Дальше от покупки,last,history_post_1855,0.0
+Дальше от покупки,last,history_post_1856,0.0
+Дальше от покупки,last,history_post_1857,0.0
+Дальше от покупки,last,history_post_1859,0.0
+Дальше от покупки,last,history_post_1860,0.0
+Дальше от покупки,last,history_post_1863,0.0
+Дальше от покупки,last,history_post_1865,0.0
+Дальше от покупки,last,history_post_1866,0.0
+Дальше от покупки,last,history_post_1868,0.0
+Дальше от покупки,last,history_post_1869,0.0
+Дальше от покупки,last,history_post_1870,0.0
+Дальше от покупки,last,history_post_1872,0.0
+Дальше от покупки,last,history_post_1874,0.0
+Дальше от покупки,last,history_post_1875,0.0
+Дальше от покупки,last,history_post_1876,0.0
+Дальше от покупки,last,history_post_1877,0.0
+Дальше от покупки,last,history_post_1878,0.0
+Дальше от покупки,last,history_post_1880,0.0
+Дальше от покупки,last,history_post_1881,0.0
+Дальше от покупки,last,history_post_1882,0.0
+Дальше от покупки,last,history_post_1885,0.0
+Дальше от покупки,last,history_post_1887,0.0
+Дальше от покупки,last,history_post_1892,0.0
+Дальше от покупки,last,history_post_1893,0.0
+Дальше от покупки,last,history_post_1895,0.0
+Дальше от покупки,last,history_post_1897,0.0
+Дальше от покупки,last,history_post_1898,0.0
+Дальше от покупки,last,history_post_1899,0.0
+Дальше от покупки,linear,history_post_1829,0.95
+Дальше от покупки,linear,history_post_1830,0.7
+Дальше от покупки,linear,history_post_1831,0.5
+Дальше от покупки,linear,history_post_1833,0.4
+Дальше от покупки,linear,history_post_1834,0.45
+Дальше от покупки,linear,history_post_1836,0.0
+Дальше от покупки,linear,history_post_1837,0.0
+Дальше от покупки,linear,history_post_1838,0.0
+Дальше от покупки,linear,history_post_1840,0.0
+Дальше от покупки,linear,history_post_1842,0.0
+Дальше от покупки,linear,history_post_1843,0.0
+Дальше от покупки,linear,history_post_1844,0.0
+Дальше от покупки,linear,history_post_1845,0.0
+Дальше от покупки,linear,history_post_1846,0.0
+Дальше от покупки,linear,history_post_1847,0.0
+Дальше от покупки,linear,history_post_1848,0.0
+Дальше от покупки,linear,history_post_1849,0.0
+Дальше от покупки,linear,history_post_1852,0.0
+Дальше от покупки,linear,history_post_1853,0.0
+Дальше от покупки,linear,history_post_1854,0.0
+Дальше от покупки,linear,history_post_1855,0.0
+Дальше от покупки,linear,history_post_1856,0.0
+Дальше от покупки,linear,history_post_1857,0.0
+Дальше от покупки,linear,history_post_1859,0.0
+Дальше от покупки,linear,history_post_1860,0.0
+Дальше от покупки,linear,history_post_1863,0.0
+Дальше от покупки,linear,history_post_1865,0.0
+Дальше от покупки,linear,history_post_1866,0.0
+Дальше от покупки,linear,history_post_1868,0.0
+Дальше от покупки,linear,history_post_1869,0.0
+Дальше от покупки,linear,history_post_1870,0.0
+Дальше от покупки,linear,history_post_1872,0.0
+Дальше от покупки,linear,history_post_1874,0.0
+Дальше от покупки,linear,history_post_1875,0.0
+Дальше от покупки,linear,history_post_1876,0.0
+Дальше от покупки,linear,history_post_1877,0.0
+Дальше от покупки,linear,history_post_1878,0.0
+Дальше от покупки,linear,history_post_1880,0.0
+Дальше от покупки,linear,history_post_1881,0.0
+Дальше от покупки,linear,history_post_1882,0.0
+Дальше от покупки,linear,history_post_1885,0.0
+Дальше от покупки,linear,history_post_1887,0.0
+Дальше от покупки,linear,history_post_1892,0.0
+Дальше от покупки,linear,history_post_1893,0.0
+Дальше от покупки,linear,history_post_1895,0.0
+Дальше от покупки,linear,history_post_1897,0.0
+Дальше от покупки,linear,history_post_1898,0.0
+Дальше от покупки,linear,history_post_1899,0.0
+Дальше от покупки,position,history_post_1829,0.95
+Дальше от покупки,position,history_post_1830,0.7
+Дальше от покупки,position,history_post_1831,0.5
+Дальше от покупки,position,history_post_1833,0.4
+Дальше от покупки,position,history_post_1834,0.45
+Дальше от покупки,position,history_post_1836,0.0
+Дальше от покупки,position,history_post_1837,0.0
+Дальше от покупки,position,history_post_1838,0.0
+Дальше от покупки,position,history_post_1840,0.0
+Дальше от покупки,position,history_post_1842,0.0
+Дальше от покупки,position,history_post_1843,0.0
+Дальше от покупки,position,history_post_1844,0.0
+Дальше от покупки,position,history_post_1845,0.0
+Дальше от покупки,position,history_post_1846,0.0
+Дальше от покупки,position,history_post_1847,0.0
+Дальше от покупки,position,history_post_1848,0.0
+Дальше от покупки,position,history_post_1849,0.0
+Дальше от покупки,position,history_post_1852,0.0
+Дальше от покупки,position,history_post_1853,0.0
+Дальше от покупки,position,history_post_1854,0.0
+Дальше от покупки,position,history_post_1855,0.0
+Дальше от покупки,position,history_post_1856,0.0
+Дальше от покупки,position,history_post_1857,0.0
+Дальше от покупки,position,history_post_1859,0.0
+Дальше от покупки,position,history_post_1860,0.0
+Дальше от покупки,position,history_post_1863,0.0
+Дальше от покупки,position,history_post_1865,0.0
+Дальше от покупки,position,history_post_1866,0.0
+Дальше от покупки,position,history_post_1868,0.0
+Дальше от покупки,position,history_post_1869,0.0
+Дальше от покупки,position,history_post_1870,0.0
+Дальше от покупки,position,history_post_1872,0.0
+Дальше от покупки,position,history_post_1874,0.0
+Дальше от покупки,position,history_post_1875,0.0
+Дальше от покупки,position,history_post_1876,0.0
+Дальше от покупки,position,history_post_1877,0.0
+Дальше от покупки,position,history_post_1878,0.0
+Дальше от покупки,position,history_post_1880,0.0
+Дальше от покупки,position,history_post_1881,0.0
+Дальше от покупки,position,history_post_1882,0.0
+Дальше от покупки,position,history_post_1885,0.0
+Дальше от покупки,position,history_post_1887,0.0
+Дальше от покупки,position,history_post_1892,0.0
+Дальше от покупки,position,history_post_1893,0.0
+Дальше от покупки,position,history_post_1895,0.0
+Дальше от покупки,position,history_post_1897,0.0
+Дальше от покупки,position,history_post_1898,0.0
+Дальше от покупки,position,history_post_1899,0.0
+Меньше касаний,first,history_post_1829,0.9
+Меньше касаний,first,history_post_1830,0.75
+Меньше касаний,first,history_post_1831,0.6
+Меньше касаний,first,history_post_1833,0.45
+Меньше касаний,first,history_post_1834,0.25
+Меньше касаний,first,history_post_1836,0.05
+Меньше касаний,first,history_post_1837,0.0
+Меньше касаний,first,history_post_1838,0.0
+Меньше касаний,first,history_post_1840,0.0
+Меньше касаний,first,history_post_1842,0.0
+Меньше касаний,first,history_post_1843,0.0
+Меньше касаний,first,history_post_1844,0.0
+Меньше касаний,first,history_post_1845,0.0
+Меньше касаний,first,history_post_1846,0.0
+Меньше касаний,first,history_post_1847,0.0
+Меньше касаний,first,history_post_1848,0.0
+Меньше касаний,first,history_post_1849,0.0
+Меньше касаний,first,history_post_1852,0.0
+Меньше касаний,first,history_post_1853,0.0
+Меньше касаний,first,history_post_1854,0.0
+Меньше касаний,first,history_post_1855,0.0
+Меньше касаний,first,history_post_1856,0.0
+Меньше касаний,first,history_post_1857,0.0
+Меньше касаний,first,history_post_1859,0.0
+Меньше касаний,first,history_post_1860,0.0
+Меньше касаний,first,history_post_1863,0.0
+Меньше касаний,first,history_post_1865,0.0
+Меньше касаний,first,history_post_1866,0.0
+Меньше касаний,first,history_post_1868,0.0
+Меньше касаний,first,history_post_1869,0.0
+Меньше касаний,first,history_post_1870,0.0
+Меньше касаний,first,history_post_1872,0.0
+Меньше касаний,first,history_post_1874,0.0
+Меньше касаний,first,history_post_1875,0.0
+Меньше касаний,first,history_post_1876,0.0
+Меньше касаний,first,history_post_1877,0.0
+Меньше касаний,first,history_post_1878,0.0
+Меньше касаний,first,history_post_1880,0.0
+Меньше касаний,first,history_post_1881,0.0
+Меньше касаний,first,history_post_1882,0.0
+Меньше касаний,first,history_post_1885,0.0
+Меньше касаний,first,history_post_1887,0.0
+Меньше касаний,first,history_post_1892,0.0
+Меньше касаний,first,history_post_1893,0.0
+Меньше касаний,first,history_post_1895,0.0
+Меньше касаний,first,history_post_1897,0.0
+Меньше касаний,first,history_post_1898,0.0
+Меньше касаний,first,history_post_1899,0.0
+Меньше касаний,last,history_post_1829,0.95
+Меньше касаний,last,history_post_1830,0.55
+Меньше касаний,last,history_post_1831,0.45
+Меньше касаний,last,history_post_1833,0.4
+Меньше касаний,last,history_post_1834,0.5
+Меньше касаний,last,history_post_1836,0.1
+Меньше касаний,last,history_post_1837,0.05
+Меньше касаний,last,history_post_1838,0.0
+Меньше касаний,last,history_post_1840,0.0
+Меньше касаний,last,history_post_1842,0.0
+Меньше касаний,last,history_post_1843,0.0
+Меньше касаний,last,history_post_1844,0.0
+Меньше касаний,last,history_post_1845,0.0
+Меньше касаний,last,history_post_1846,0.0
+Меньше касаний,last,history_post_1847,0.0
+Меньше касаний,last,history_post_1848,0.0
+Меньше касаний,last,history_post_1849,0.0
+Меньше касаний,last,history_post_1852,0.0
+Меньше касаний,last,history_post_1853,0.0
+Меньше касаний,last,history_post_1854,0.0
+Меньше касаний,last,history_post_1855,0.0
+Меньше касаний,last,history_post_1856,0.0
+Меньше касаний,last,history_post_1857,0.0
+Меньше касаний,last,history_post_1859,0.0
+Меньше касаний,last,history_post_1860,0.0
+Меньше касаний,last,history_post_1863,0.0
+Меньше касаний,last,history_post_1865,0.0
+Меньше касаний,last,history_post_1866,0.0
+Меньше касаний,last,history_post_1868,0.0
+Меньше касаний,last,history_post_1869,0.0
+Меньше касаний,last,history_post_1870,0.0
+Меньше касаний,last,history_post_1872,0.0
+Меньше касаний,last,history_post_1874,0.0
+Меньше касаний,last,history_post_1875,0.0
+Меньше касаний,last,history_post_1876,0.0
+Меньше касаний,last,history_post_1877,0.0
+Меньше касаний,last,history_post_1878,0.0
+Меньше касаний,last,history_post_1880,0.0
+Меньше касаний,last,history_post_1881,0.0
+Меньше касаний,last,history_post_1882,0.0
+Меньше касаний,last,history_post_1885,0.0
+Меньше касаний,last,history_post_1887,0.0
+Меньше касаний,last,history_post_1892,0.0
+Меньше касаний,last,history_post_1893,0.0
+Меньше касаний,last,history_post_1895,0.0
+Меньше касаний,last,history_post_1897,0.0
+Меньше касаний,last,history_post_1898,0.0
+Меньше касаний,last,history_post_1899,0.0
+Меньше касаний,linear,history_post_1829,0.9
+Меньше касаний,linear,history_post_1830,0.65
+Меньше касаний,linear,history_post_1831,0.55
+Меньше касаний,linear,history_post_1833,0.45
+Меньше касаний,linear,history_post_1834,0.4
+Меньше касаний,linear,history_post_1836,0.05
+Меньше касаний,linear,history_post_1837,0.0
+Меньше касаний,linear,history_post_1838,0.0
+Меньше касаний,linear,history_post_1840,0.0
+Меньше касаний,linear,history_post_1842,0.0
+Меньше касаний,linear,history_post_1843,0.0
+Меньше касаний,linear,history_post_1844,0.0
+Меньше касаний,linear,history_post_1845,0.0
+Меньше касаний,linear,history_post_1846,0.0
+Меньше касаний,linear,history_post_1847,0.0
+Меньше касаний,linear,history_post_1848,0.0
+Меньше касаний,linear,history_post_1849,0.0
+Меньше касаний,linear,history_post_1852,0.0
+Меньше касаний,linear,history_post_1853,0.0
+Меньше касаний,linear,history_post_1854,0.0
+Меньше касаний,linear,history_post_1855,0.0
+Меньше касаний,linear,history_post_1856,0.0
+Меньше касаний,linear,history_post_1857,0.0
+Меньше касаний,linear,history_post_1859,0.0
+Меньше касаний,linear,history_post_1860,0.0
+Меньше касаний,linear,history_post_1863,0.0
+Меньше касаний,linear,history_post_1865,0.0
+Меньше касаний,linear,history_post_1866,0.0
+Меньше касаний,linear,history_post_1868,0.0
+Меньше касаний,linear,history_post_1869,0.0
+Меньше касаний,linear,history_post_1870,0.0
+Меньше касаний,linear,history_post_1872,0.0
+Меньше касаний,linear,history_post_1874,0.0
+Меньше касаний,linear,history_post_1875,0.0
+Меньше касаний,linear,history_post_1876,0.0
+Меньше касаний,linear,history_post_1877,0.0
+Меньше касаний,linear,history_post_1878,0.0
+Меньше касаний,linear,history_post_1880,0.0
+Меньше касаний,linear,history_post_1881,0.0
+Меньше касаний,linear,history_post_1882,0.0
+Меньше касаний,linear,history_post_1885,0.0
+Меньше касаний,linear,history_post_1887,0.0
+Меньше касаний,linear,history_post_1892,0.0
+Меньше касаний,linear,history_post_1893,0.0
+Меньше касаний,linear,history_post_1895,0.0
+Меньше касаний,linear,history_post_1897,0.0
+Меньше касаний,linear,history_post_1898,0.0
+Меньше касаний,linear,history_post_1899,0.0
+Меньше касаний,position,history_post_1829,0.9
+Меньше касаний,position,history_post_1830,0.65
+Меньше касаний,position,history_post_1831,0.55
+Меньше касаний,position,history_post_1833,0.45
+Меньше касаний,position,history_post_1834,0.4
+Меньше касаний,position,history_post_1836,0.05
+Меньше касаний,position,history_post_1837,0.0
+Меньше касаний,position,history_post_1838,0.0
+Меньше касаний,position,history_post_1840,0.0
+Меньше касаний,position,history_post_1842,0.0
+Меньше касаний,position,history_post_1843,0.0
+Меньше касаний,position,history_post_1844,0.0
+Меньше касаний,position,history_post_1845,0.0
+Меньше касаний,position,history_post_1846,0.0
+Меньше касаний,position,history_post_1847,0.0
+Меньше касаний,position,history_post_1848,0.0
+Меньше касаний,position,history_post_1849,0.0
+Меньше касаний,position,history_post_1852,0.0
+Меньше касаний,position,history_post_1853,0.0
+Меньше касаний,position,history_post_1854,0.0
+Меньше касаний,position,history_post_1855,0.0
+Меньше касаний,position,history_post_1856,0.0
+Меньше касаний,position,history_post_1857,0.0
+Меньше касаний,position,history_post_1859,0.0
+Меньше касаний,position,history_post_1860,0.0
+Меньше касаний,position,history_post_1863,0.0
+Меньше касаний,position,history_post_1865,0.0
+Меньше касаний,position,history_post_1866,0.0
+Меньше касаний,position,history_post_1868,0.0
+Меньше касаний,position,history_post_1869,0.0
+Меньше касаний,position,history_post_1870,0.0
+Меньше касаний,position,history_post_1872,0.0
+Меньше касаний,position,history_post_1874,0.0
+Меньше касаний,position,history_post_1875,0.0
+Меньше касаний,position,history_post_1876,0.0
+Меньше касаний,position,history_post_1877,0.0
+Меньше касаний,position,history_post_1878,0.0
+Меньше касаний,position,history_post_1880,0.0
+Меньше касаний,position,history_post_1881,0.0
+Меньше касаний,position,history_post_1882,0.0
+Меньше касаний,position,history_post_1885,0.0
+Меньше касаний,position,history_post_1887,0.0
+Меньше касаний,position,history_post_1892,0.0
+Меньше касаний,position,history_post_1893,0.0
+Меньше касаний,position,history_post_1895,0.0
+Меньше касаний,position,history_post_1897,0.0
+Меньше касаний,position,history_post_1898,0.0
+Меньше касаний,position,history_post_1899,0.0
