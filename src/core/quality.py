@@ -24,6 +24,7 @@ def status(conn, acquiring_rate: float) -> str:
     n = one("SELECT COUNT(*) FROM dim_placement WHERE placement_type != 'unknown'")
     out.append(f"\n<b>Реклама</b> (размещений: {n})")
     checks = [
+        ("стоимость неизвестна", "cost_known=0"),
         ("нет времени публикации", "publication_time IS NULL"),
         ("нет типа поста", "post_category IS NULL"),
         ("нет кампании", "campaign_name IS NULL"),
@@ -75,7 +76,7 @@ def status(conn, acquiring_rate: float) -> str:
     if acquiring_rate:
         out.append(f"{warn} эквайринг — оценка по ставке {acquiring_rate:.1%}, а не фактическая комиссия")
     else:
-        out.append(f"{warn} эквайринг не задан (ACQUIRING_RATE в .env) — ROMI по марже не считается")
+        out.append(f"{warn} эквайринг не задан (ACQUIRING_RATE в .env) — ROMI с комиссией неизвестен для оплат без данных о комиссии")
 
     out.append("\n<b>Не видим даже с ботом</b>")
     out += [f"• {x}" for x in BLIND_SPOTS]

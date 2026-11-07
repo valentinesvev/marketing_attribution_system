@@ -1,0 +1,9 @@
+scenario,course,items,revenue
+course_launch,Аналитика про,85,682614.25
+course_launch,Аналитика старт,99,680030.5
+external_event,Аналитика про,123,975915.75
+external_event,Аналитика старт,102,696255.5
+flat,Аналитика про,106,838924.25
+flat,Аналитика старт,103,703935.5
+zero_ad_effect,Аналитика про,92,732871.5
+zero_ad_effect,Аналитика старт,94,651925.0

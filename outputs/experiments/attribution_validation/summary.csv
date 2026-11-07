@@ -1,0 +1,21 @@
+config,model,most_frequent_post,frequency
+Базовое,first,history_post_1829,1.0
+Базовое,last,history_post_1829,0.85
+Базовое,linear,history_post_1829,0.95
+Базовое,position,history_post_1829,0.95
+Меньше касаний,first,history_post_1829,0.9
+Меньше касаний,last,history_post_1829,0.95
+Меньше касаний,linear,history_post_1829,0.9
+Меньше касаний,position,history_post_1829,0.9
+Больше касаний,first,history_post_1829,1.0
+Больше касаний,last,history_post_1834,0.85
+Больше касаний,linear,history_post_1829,0.9
+Больше касаний,position,history_post_1829,0.95
+Ближе к покупке,first,history_post_1829,1.0
+Ближе к покупке,last,history_post_1829,0.9
+Ближе к покупке,linear,history_post_1829,0.95
+Ближе к покупке,position,history_post_1829,0.95
+Дальше от покупки,first,history_post_1829,1.0
+Дальше от покупки,last,history_post_1829,0.75
+Дальше от покупки,linear,history_post_1829,0.95
+Дальше от покупки,position,history_post_1829,0.95
