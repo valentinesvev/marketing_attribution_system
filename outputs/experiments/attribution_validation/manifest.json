@@ -1,6 +1,44 @@
 {
   "experiment_only": true,
   "contract_version": "1.3",
+  "horizons_days": [
+    3,
+    7,
+    14
+  ],
+  "post_attention_half_life_days": 7.0,
+  "common_placement_ids": [
+    "history_post_1829",
+    "history_post_1830",
+    "history_post_1831",
+    "history_post_1833",
+    "history_post_1834",
+    "history_post_1836",
+    "history_post_1837",
+    "history_post_1838",
+    "history_post_1840",
+    "history_post_1842",
+    "history_post_1843",
+    "history_post_1844",
+    "history_post_1845",
+    "history_post_1846",
+    "history_post_1847",
+    "history_post_1848",
+    "history_post_1849",
+    "history_post_1852",
+    "history_post_1853",
+    "history_post_1854",
+    "history_post_1855",
+    "history_post_1856",
+    "history_post_1857",
+    "history_post_1859",
+    "history_post_1860",
+    "history_post_1863",
+    "history_post_1865",
+    "history_post_1866",
+    "history_post_1868",
+    "history_post_1869"
+  ],
   "seeds": [
     0,
     1,
@@ -74,12 +112,12 @@
     }
   },
   "manual_checks_passed": 64,
-  "generator_sha256": "b450753c35e139a38d4d3dac4c0a5200eaa02a2b8ae7562331be00611edcc398",
-  "engine_sha256": "d861843b5a88fb1e9277aee5009acad3557c08aae9a5ecd4e0eec00d42820e1a",
+  "generator_sha256": "c08837ec644fb05ff429861b66ab05921ebe455a9caac3a69542a5691afa868d",
+  "engine_sha256": "c035380620597c04f3c72861a795cf0df15b61937a5e481f94b1e8db03f8df87",
   "source_sha256": {
-    "metrics.md": "4d4b290f85208137d918a9b33f98b28181d2abea99055eb2d458d342d9ce60f2",
-    "data/raw/base.csv": "417ed727c1bd654fbdfff2223add5d555481139057d44e2b5617b3cc5d4529bf",
-    "data/processed/analysis_posts_v2.csv": "82c143f1f338af5f43995b2990670b3b6b454544af2897fcb6d44238d6695d5c"
+    "metrics.md": "0120ec9cb3118056d5842e7bcab3ac25b1fc2c6611c551293481e4600bd8312a",
+    "data/raw/base.csv": "84e10e47a6c37acfff49414e334fcef2fb1fab3642c6e1044d23b31079fcceb6",
+    "data/processed/analysis_posts_v2.csv": "22eea2a07b59324c09f10a889eee532ea92938649c67d4b5eb9b92d325ca1fb6"
   },
-  "as_of": "2026-11-06T09:45:55.977395+00:00"
+  "as_of": "2026-11-06T16:56:13.504954+00:00"
 }

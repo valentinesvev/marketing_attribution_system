@@ -12,8 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--notebook", type=Path, default=ROOT / "notebooks/synthetic_attribution_experiment_updated.ipynb")
-    parser.add_argument("--output", type=Path, default=ROOT / "outputs/experiments/stage1/executed.ipynb")
+    parser.add_argument("--notebook", type=Path, default=ROOT / "notebooks/02_attribution_demo.ipynb")
+    parser.add_argument("--output", type=Path, default=ROOT / "outputs/demo/attribution/executed.ipynb")
     args = parser.parse_args()
     source = args.notebook.resolve()
     notebook = nbformat.read(source, as_version=4)
