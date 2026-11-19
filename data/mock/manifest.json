@@ -100,5 +100,7 @@
   "software": {
     "numpy": "2.3.5",
     "pandas": "2.2.3"
-  }
+  },
+  "data_directory": "data/mock",
+  "note": "CSV moved without regeneration; parameters describe the original saved run."
 }

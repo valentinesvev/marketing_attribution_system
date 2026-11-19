@@ -1,0 +1,65 @@
+case,model,result
+Одно касание,first,PASS
+Одно касание,last,PASS
+Одно касание,linear,PASS
+Одно касание,position,PASS
+Два касания,first,PASS
+Два касания,last,PASS
+Два касания,linear,PASS
+Два касания,position,PASS
+Три касания,first,PASS
+Три касания,last,PASS
+Три касания,linear,PASS
+Три касания,position,PASS
+Четыре касания,first,PASS
+Четыре касания,last,PASS
+Четыре касания,linear,PASS
+Четыре касания,position,PASS
+Нет касаний,first,PASS
+Нет касаний,last,PASS
+Нет касаний,linear,PASS
+Нет касаний,position,PASS
+Старше окна,first,PASS
+Старше окна,last,PASS
+Старше окна,linear,PASS
+Старше окна,position,PASS
+Ровно 30 дней,first,PASS
+Ровно 30 дней,last,PASS
+Ровно 30 дней,linear,PASS
+Ровно 30 дней,position,PASS
+После оплаты,first,PASS
+После оплаты,last,PASS
+После оплаты,linear,PASS
+После оплаты,position,PASS
+Ровно в оплату,first,PASS
+Ровно в оплату,last,PASS
+Ровно в оплату,linear,PASS
+Ровно в оплату,position,PASS
+Чужой неоплаченный путь,first,PASS
+Чужой неоплаченный путь,last,PASS
+Чужой неоплаченный путь,linear,PASS
+Чужой неоплаченный путь,position,PASS
+Без рекламной метки,first,PASS
+Без рекламной метки,last,PASS
+Без рекламной метки,linear,PASS
+Без рекламной метки,position,PASS
+"Повторная оплата, сброс",first,PASS
+"Повторная оплата, сброс",last,PASS
+"Повторная оплата, сброс",linear,PASS
+"Повторная оплата, сброс",position,PASS
+Повтор без новых касаний,first,PASS
+Повтор без новых касаний,last,PASS
+Повтор без новых касаний,linear,PASS
+Повтор без новых касаний,position,PASS
+"Одно время, порядок ID",first,PASS
+"Одно время, порядок ID",last,PASS
+"Одно время, порядок ID",linear,PASS
+"Одно время, порядок ID",position,PASS
+Повторные касания поста,first,PASS
+Повторные касания поста,last,PASS
+Повторные касания поста,linear,PASS
+Повторные касания поста,position,PASS
+"Два курса, один заказ",first,PASS
+"Два курса, один заказ",last,PASS
+"Два курса, один заказ",linear,PASS
+"Два курса, один заказ",position,PASS

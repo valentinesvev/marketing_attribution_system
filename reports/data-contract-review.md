@@ -2,7 +2,7 @@
 
 ## Итог проверки
 
-Проверены [metrics.md](../metrics.md), все 22 ячейки [актуального ноутбука](../notebooks/synthetic_attribution_experiment_updated.ipynb), используемые модули расчётов и сохранённые результаты. Ревью выполнено отдельным агентом GPT-6 Astra с `reasoning_effort=xhigh`.
+Проверены [metrics.md](../metrics.md), все 22 ячейки [ноутбука на момент ревью](https://github.com/valentinesvev/marketing_attribution_system/blob/0a575ab/notebooks/synthetic_attribution_experiment_updated.ipynb), используемые модули расчётов и сохранённые результаты. Ревью выполнено отдельным агентом GPT-6 Astra с `reasoning_effort=xhigh`.
 
 Основной сохранённый прогон согласован: 729 заказов, 7 029 571 ₽ выручки; веса и выручка сохраняются у каждой модели. Пересчёт текущими функциями D7/D14/D30 и метрик seed=42 по сохранённой генерации совпал с CSV, максимальное расхождение — 0.
 
@@ -157,7 +157,7 @@
 
 **Категория:** Реализация. **Тип:** подтверждённая ошибка.
 
-**Место:** ячейка 18 ноутбука, `run_summary = runs.groupby(...)`; [run_summary.csv](../outputs/experiments/stage1/seed42_13_45rtf/run_summary.csv). Требование статистики серии — `metrics.md`, строка 150.
+**Место:** ячейка 18 ноутбука, `run_summary = runs.groupby(...)`; [run_summary.csv](https://github.com/valentinesvev/marketing_attribution_system/blob/0a575ab/outputs/experiments/stage1/seed42_13_45rtf/run_summary.csv). Требование статистики серии — `metrics.md`, строка 150.
 
 Стандартное отклонение сохраняется только для MAE; для остальных метрик — только средние. Числа определённых значений нет ни для одной метрики. Например, D30/first: `rank_mean≈0,081`, `rank_std≈0,635`; `sign_accuracy` имеет среднее ≈0,492 и стандартное отклонение ≈0,258.
 
@@ -167,7 +167,7 @@
 
 **Категория:** Реализация. **Тип:** подтверждённая ошибка.
 
-**Место:** [synthetic.py](../src/experiments/synthetic.py), строки 372–377; [manifest.json](../outputs/experiments/stage1/seed42_13_45rtf/manifest.json); ячейка 20. Обязательные метаданные — `metrics.md`, строка 37.
+**Место:** [synthetic.py](../src/experiments/synthetic.py), строки 372–377; [manifest.json](https://github.com/valentinesvev/marketing_attribution_system/blob/0a575ab/outputs/experiments/stage1/seed42_13_45rtf/manifest.json); ячейка 20. Обязательные метаданные — `metrics.md`, строка 37.
 
 Отсутствуют версия контракта, идентификация исторического источника/снимка и `as_of`. `history["source"]` создаётся, но не передаётся дальше. После изменения `base.csv` одинаковые seed и параметры не позволяют восстановить прежний результат.
 
@@ -177,7 +177,7 @@
 
 **Категория:** Реализация. **Тип:** подтверждённая ошибка текста ноутбука.
 
-**Место:** ячейка 6, `calendar-context`, фраза «Проверяем несколько вариантов их соотношения»; [README_experiment.md](../notebooks/README_experiment.md), строка 98; [synthetic.py](../src/experiments/synthetic.py), строки 337–345.
+**Место:** ячейка 6, `calendar-context`, фраза «Проверяем несколько вариантов их соотношения»; [README_experiment.md](https://github.com/valentinesvev/marketing_attribution_system/blob/0a575ab/notebooks/README_experiment.md), строка 98; [synthetic.py](../src/experiments/synthetic.py), строки 337–345.
 
 Серия использует seeds 42–71 при одной конфигурации. Параметры соотношения базового спроса и рекламного механизма не варьируются. Это вариативность одной генеративной модели, а не проверка разных содержательных предположений.
 

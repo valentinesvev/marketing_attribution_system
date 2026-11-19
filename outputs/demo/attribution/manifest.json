@@ -1,0 +1,77 @@
+{
+  "experiment_only": true,
+  "input_mode": "saved_csv",
+  "input_directory": "data/mock",
+  "input_sha256": {
+    "orders.csv": "91dda4d78fb1dd80e970ac214676ada4888699f833b7d1bf835d29fb1195e860",
+    "touches.csv": "942fd069d9fda0c852f601ec04596b2ff810c01ec8a97d83e576bea3e39ba7c0",
+    "placements.csv": "9a5d6f0072e4154f444e432865516ea785592cc7ad5cfba6699d97e54589e9b2",
+    "manifest.json": "a6aba83b718c1f46bde063c17a26d8bb29f0f6dc05a4a795ccb49896117912e3"
+  },
+  "generation_parameters": {
+    "SEED": 42,
+    "BUYER_TOUCH_COUNTS": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "BUYER_TOUCH_PROBABILITIES": [
+      0.3,
+      0.35,
+      0.25,
+      0.1
+    ],
+    "ATTRIBUTION_WINDOW_DAYS": 30,
+    "BUYER_DELAY_SCALE_DAYS": 7.0,
+    "NONBUYERS_PER_BUYER": 3.0,
+    "NONBUYER_EXTRA_TOUCHES_LAMBDA": 1.0,
+    "POST_ATTENTION_HALF_LIFE_DAYS": 7.0,
+    "NONBUYER_TIME_DISTRIBUTION": "uniform",
+    "LEAD_PROBABILITY": 0.2,
+    "TIMEZONE": "Europe/Moscow",
+    "MIN_GAP_SECONDS": 1,
+    "OUTPUT_SUBDIR": "outputs/experiments/history_enrichment"
+  },
+  "window_days": 30,
+  "horizons_days": [
+    7,
+    14
+  ],
+  "report_horizon_days": 7,
+  "common_placement_ids": [
+    "history_post_1829",
+    "history_post_1830",
+    "history_post_1831",
+    "history_post_1833",
+    "history_post_1834",
+    "history_post_1836",
+    "history_post_1837",
+    "history_post_1838",
+    "history_post_1840",
+    "history_post_1842",
+    "history_post_1843",
+    "history_post_1844",
+    "history_post_1845",
+    "history_post_1846",
+    "history_post_1847",
+    "history_post_1848",
+    "history_post_1849",
+    "history_post_1852",
+    "history_post_1853",
+    "history_post_1854",
+    "history_post_1855",
+    "history_post_1856",
+    "history_post_1857",
+    "history_post_1859",
+    "history_post_1860",
+    "history_post_1863",
+    "history_post_1865",
+    "history_post_1866",
+    "history_post_1868",
+    "history_post_1869"
+  ],
+  "manual_checks_passed": 64,
+  "engine_sha256": "c035380620597c04f3c72861a795cf0df15b61937a5e481f94b1e8db03f8df87",
+  "as_of": "2026-11-18T04:49:42.520445+00:00"
+}
